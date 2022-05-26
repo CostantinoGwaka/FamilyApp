@@ -3,18 +3,10 @@ import 'package:familyapp/screens/dashboard/widget/activity_desc.dart';
 import 'package:familyapp/screens/dashboard/widget/all_activity.dart';
 import 'package:familyapp/screens/family/family.dart';
 import 'package:familyapp/utilities/constant.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:image_stack/image_stack.dart';
-import 'package:familyapp/screens/complaints.dart';
-import 'package:familyapp/screens/eventslist.dart';
-import 'package:familyapp/screens/visitorscode.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:date_picker_timeline/date_picker_timeline.dart';
-import 'package:familyapp/screens/memberships.dart';
-import 'package:familyapp/screens/helpdesk.dart';
 import 'package:familyapp/screens/list2.dart';
 
 class DashBoard extends StatefulWidget {
