@@ -1,3 +1,4 @@
+import 'package:familyapp/screens/account/account.dart';
 import 'package:familyapp/screens/dashboard/widget/activity_desc.dart';
 import 'package:familyapp/screens/dashboard/widget/all_activity.dart';
 import 'package:familyapp/screens/family/family.dart';
@@ -73,14 +74,22 @@ class DashboardScreen extends State<DashBoard> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Account(),
+                      ),
+                    );
+                  },
                   child: Container(
                     width: 40,
                     height: 40,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: NetworkImage(
-                            "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"),
+                        image: AssetImage(
+                          "images/user.png",
+                        ),
                         fit: BoxFit.cover,
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(50.0)),
@@ -252,19 +261,19 @@ class DashboardScreen extends State<DashBoard> {
                                       MaterialPageRoute(builder: (context) => SchoolList()),
                                     ),
                                   ),
-                                  _buildItemCard(
-                                    title: "Mipango",
-                                    total: "Haijafanya: 4",
-                                    used: "Ishafanywa: 3",
-                                    totalNum: 4,
-                                    usedNum: 3,
-                                    color: Colors.orange,
-                                    icon: FontAwesomeIcons.comment,
-                                    onTap: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => Complaints()),
-                                    ),
-                                  ),
+                                  // _buildItemCard(
+                                  //   title: "Mipango",
+                                  //   total: "Haijafanya: 4",
+                                  //   used: "Ishafanywa: 3",
+                                  //   totalNum: 4,
+                                  //   usedNum: 3,
+                                  //   color: Colors.orange,
+                                  //   icon: FontAwesomeIcons.comment,
+                                  //   onTap: () => Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(builder: (context) => Complaints()),
+                                  //   ),
+                                  // ),
                                   // _buildItemCard(
                                   //     title: "Visitors",
                                   //     total: "Approved: 4",
@@ -277,19 +286,19 @@ class DashboardScreen extends State<DashBoard> {
                                   //           context,
                                   //           MaterialPageRoute(builder: (context) => VisitorsCode()),
                                   //         )),
-                                  _buildItemCard(
-                                    title: "Akaunti",
-                                    total: "Tap to view",
-                                    used: "",
-                                    totalNum: 1,
-                                    usedNum: 1,
-                                    color: Colors.deepPurple,
-                                    icon: FontAwesomeIcons.userCircle,
-                                    onTap: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => HelpDesk()),
-                                    ),
-                                  ),
+                                  // _buildItemCard(
+                                  //   title: "Akaunti",
+                                  //   total: "Tap to view",
+                                  //   used: "",
+                                  //   totalNum: 1,
+                                  //   usedNum: 1,
+                                  //   color: Colors.deepPurple,
+                                  //   icon: FontAwesomeIcons.userCircle,
+                                  //   onTap: () => Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(builder: (context) => HelpDesk()),
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ),
