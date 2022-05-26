@@ -48,9 +48,11 @@ class LocationSlider extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 24.0),
         scrollDirection: Axis.horizontal,
         itemBuilder: (BuildContext context, int index) {
-          return GestureDetector(
+          return 
+          GestureDetector(
             onTap: () {},
-            child: Container(
+            child: 
+            Container(
               width: ScreenUtil().setWidth(200.0),
               decoration: BoxDecoration(
                 color: locations[index].color,

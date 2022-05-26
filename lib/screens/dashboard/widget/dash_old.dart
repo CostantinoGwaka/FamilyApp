@@ -1,3 +1,4 @@
+import 'package:familyapp/screens/family/family.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -62,7 +63,8 @@ class DashboardScreen extends State<DashBoard> {
                             height: 50,
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: NetworkImage("https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"),
+                                image: NetworkImage(
+                                    "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"),
                                 fit: BoxFit.cover,
                               ),
                               borderRadius: BorderRadius.all(Radius.circular(50.0)),
@@ -93,7 +95,7 @@ class DashboardScreen extends State<DashBoard> {
                               text: "Familia 3 Zenye watu \nwengi zaidi!",
                               style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 24,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               )),
                         ),
@@ -176,21 +178,21 @@ class DashboardScreen extends State<DashBoard> {
                               icon: FontAwesomeIcons.addressCard,
                               onTap: () => Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => Memberships()),
+                                MaterialPageRoute(builder: (context) => AllFamily()),
                               ),
                             ),
-                            // _buildItemCard(
-                            //     title: "Events",
-                            //     total: "This month: 10",
-                            //     used: "Replied: 5",
-                            //     totalNum: 10,
-                            //     usedNum: 5,
-                            //     color: Colors.red,
-                            //     icon: FontAwesomeIcons.campground,
-                            //     onTap: () => Navigator.push(
-                            //           context,
-                            //           MaterialPageRoute(builder: (context) => EventsTimeline()),
-                            //         )),
+                            _buildItemCard(
+                                title: "Events",
+                                total: "This month: 10",
+                                used: "Replied: 5",
+                                totalNum: 10,
+                                usedNum: 5,
+                                color: Colors.red,
+                                icon: FontAwesomeIcons.campground,
+                                onTap: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Memberships()),
+                                    )),
                             _buildItemCard(
                                 title: "Watu",
                                 total: "Wanaume: 6",
@@ -321,70 +323,72 @@ class DashboardScreen extends State<DashBoard> {
   }
 
   Widget _buildEventsCard({String title, String subject, String time, List<String> imageList, int count}) {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            RichText(
-              text: TextSpan(
-                text: title,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
+    return GestureDetector(
+      child: Card(
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              RichText(
+                text: TextSpan(
+                  text: title,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            RichText(
-              text: TextSpan(
-                text: subject,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
+              SizedBox(
+                height: 20,
+              ),
+              RichText(
+                text: TextSpan(
+                  text: subject,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                RichText(
-                  text: TextSpan(children: [
-                    WidgetSpan(
-                        child: Icon(
-                      Icons.timer,
-                      size: 16,
-                    )),
-                    TextSpan(
-                      text: "  " + time,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                      ),
-                    )
-                  ]),
-                ),
-                // ImageStack(
-                //   imageList: imageList,
-                //   totalCount: count,
-                //   imageRadius: 25,
-                //   imageCount: 4,
-                // )
-              ],
-            )
-          ],
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  RichText(
+                    text: TextSpan(children: [
+                      WidgetSpan(
+                          child: Icon(
+                        Icons.timer,
+                        size: 16,
+                      )),
+                      TextSpan(
+                        text: "  " + time,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                        ),
+                      )
+                    ]),
+                  ),
+                  // ImageStack(
+                  //   imageList: imageList,
+                  //   totalCount: count,
+                  //   imageRadius: 25,
+                  //   imageCount: 4,
+                  // )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

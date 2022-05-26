@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'dart:async';
 
-import 'package:familyapp/screens/dashboard.dart';
+import 'package:familyapp/screens/dashboard/dashboard.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   var photos = ['images/family.png', 'images/family.png'];
@@ -15,10 +16,50 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   FocusNode focusEmail = new FocusNode();
   FocusNode focusPass = new FocusNode();
+  var emailController = TextEditingController();
+  var passController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String username = '';
 
   var _timer;
   int _pos = 0;
+  bool _isChecked = false;
+  bool _isObscure = true;
 
+  void _handleRememberme(bool value) {
+    _isChecked = value;
+    SharedPreferences.getInstance().then(
+      (prefs) {
+        prefs.setBool("remember_me", value);
+        prefs.setString('email', emailController.text);
+        prefs.setString('password', passController.text);
+      },
+    );
+    setState(() {
+      _isChecked = value;
+    });
+  }
+
+  void _loadUserEmailPassword() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    var _email = _prefs.getString("email") ?? "";
+    var _password = _prefs.getString("password") ?? "";
+    var _remeberMe = _prefs.getBool("remember_me") ?? false;
+    if (_remeberMe) {
+      setState(() {
+        _isChecked = true;
+      });
+      username = _email;
+      emailController.text = _email;
+      passController.text = _password;
+    }
+  }
+
+ bool validateEmail(String value) {
+    bool emailValid =
+        RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$").hasMatch(value);
+    return (value.isNotEmpty && emailValid) ? true : false;
+  }
   @override
   void initState() {
     _timer = Timer.periodic(Duration(seconds: 7), (Timer t) {
@@ -28,6 +69,7 @@ class _LoginState extends State<Login> {
     });
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +86,8 @@ class _LoginState extends State<Login> {
           resizeToAvoidBottomInset: false,
           backgroundColor: Colors.white,
           body: SafeArea(
-            child: Container(
+            child: 
+            Container(
               margin: EdgeInsets.all(45),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

@@ -55,7 +55,8 @@ class _MembershipsState extends State<Memberships> {
             ),
           ),
           SingleChildScrollView(
-            child: Container(
+            child:
+             Container(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
