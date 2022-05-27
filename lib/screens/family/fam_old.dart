@@ -1,5 +1,4 @@
 import 'package:familyapp/screens/family/widget/each_family.dart';
-import 'package:familyapp/utilities/constant.dart';
 import 'package:flutter/material.dart';
 
 class AllFamily extends StatefulWidget {
@@ -20,71 +19,94 @@ class _AllFamilyState extends State<AllFamily> {
     {"single": "true", "name": "Cosmas Paulo", "location": "Mbezi - 289", "type": "Watu: 5", "logoText": "images/user.png"},
     {"single": "true", "name": "Samweli Gwaka", "location": "Residential park, Lane - 2", "type": "Watu: 3", "logoText": "images/user.png"},
     {"single": "false", "name": "Angela Cosmas", "location": "Tabata - 453", "type": "Watu: 9", "logoText": "images/user.png"},
-    {"single": "false", "name": "Angela Cosmas", "location": "Tabata - 453", "type": "Watu: 9", "logoText": "images/user.png"},
-    {"single": "false", "name": "Angela Cosmas", "location": "Tabata - 453", "type": "Watu: 9", "logoText": "images/user.png"},
-    {"single": "false", "name": "Angela Cosmas", "location": "Tabata - 453", "type": "Watu: 9", "logoText": "images/user.png"},
-    {"single": "false", "name": "Angela Cosmas", "location": "Tabata - 453", "type": "Watu: 9", "logoText": "images/user.png"},
     {"single": "false", "name": "victor Salim", "location": "Posta - 763", "type": "Watu: 3", "logoText": "images/user.png"},
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        title: Text(
-          'All Families',
-          style: Theme.of(context).textTheme.headline6,
-        ),
-        iconTheme: Theme.of(context).iconTheme,
-        elevation: 0,
-      ),
       backgroundColor: Color(0xfff0f0f0),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          child: Column(
+          child: Stack(
             children: <Widget>[
               Container(
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20,),
-                      child: Material(
-                        elevation: 5.0,
-                        borderRadius: BorderRadius.all(Radius.circular(30),),
-                        child: TextField(
-                          // controller: TextEditingController(text: locations[0]),
-                          cursorColor: Theme.of(context).primaryColor,
-                          style: dropdownMenuItem,
-                          decoration: InputDecoration(
-                              hintText: "Search Families or member",
-                              hintStyle: TextStyle(color: Colors.black38, fontSize: 16,),
-                              prefixIcon: Material(
-                                elevation: 0.0,
-                                borderRadius: BorderRadius.all(Radius.circular(30),),
-                                child: Icon(Icons.search,),
-                              ),
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.symmetric(horizontal: 25, vertical: 13,),),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: ListView.builder(
-                    physics: physics,
+                padding: EdgeInsets.only(top: 145),
+                height: MediaQuery.of(context).size.height,
+                width: double.infinity,
+                child:
+                 ListView.builder(
                     itemCount: schoolLists.length,
                     itemBuilder: (BuildContext context, int index) {
                       return buildList(context, index);
                     }),
               ),
+              Container(
+                height: 68,
+                width: double.infinity,
+                decoration: BoxDecoration(color: primary, borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30))),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      IconButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Text(
+                        "All Families",
+                        style: TextStyle(color: Colors.white, fontSize: 24),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.filter_list,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 110,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Material(
+                        elevation: 5.0,
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        child: TextField(
+                          // controller: TextEditingController(text: locations[0]),
+                          cursorColor: Theme.of(context).primaryColor,
+                          style: dropdownMenuItem,
+                          decoration: InputDecoration(
+                              hintText: "Search Societies or Clubs",
+                              hintStyle: TextStyle(color: Colors.black38, fontSize: 16),
+                              prefixIcon: Material(
+                                elevation: 0.0,
+                                borderRadius: BorderRadius.all(Radius.circular(30)),
+                                child: Icon(Icons.search),
+                              ),
+                              border: InputBorder.none,
+                              contentPadding: EdgeInsets.symmetric(horizontal: 25, vertical: 13)),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),

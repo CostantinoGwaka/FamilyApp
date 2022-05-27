@@ -1,16 +1,17 @@
+import 'package:familyapp/screens/bottom_nav/bottom_nav.dart';
 import 'package:familyapp/screens/widget/buttons.dart';
 import 'package:familyapp/screens/widget/input.dart';
 import 'package:familyapp/utilities/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'dart:async';
 
-import 'package:familyapp/screens/dashboard/dashboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
-  var photos = ['images/family.png', 'images/family.png'];
+  Login({Key key}) : super(key: key);
+
+  final photos = ['images/family.png', 'images/family.png'];
 
   @override
   _LoginState createState() => _LoginState();
@@ -24,6 +25,7 @@ class _LoginState extends State<Login> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String username = '';
 
+  // ignore: unused_field
   var _timer;
   int _pos = 0;
   bool _isChecked = false;
@@ -66,6 +68,7 @@ class _LoginState extends State<Login> {
 
   @override
   void initState() {
+    _loadUserEmailPassword();
     _timer = Timer.periodic(Duration(seconds: 7), (Timer t) {
       setState(() {
         _pos = (_pos + 1) % widget.photos.length;
@@ -265,7 +268,7 @@ class _LoginState extends State<Login> {
       action: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => DashBoard()),
+          MaterialPageRoute(builder: (context) => BottomNavigation()),
         );
       },
     );

@@ -2,21 +2,52 @@ import 'package:familyapp/screens/family/widget/each_family.dart';
 import 'package:familyapp/utilities/constant.dart';
 import 'package:flutter/material.dart';
 
-class FamilyDescription extends StatefulWidget {
-  final String title;
-  FamilyDescription({Key key, this.title}) : super(key: key);
+class AllMember extends StatefulWidget {
+  const AllMember({Key key}) : super(key: key);
 
   @override
-  State<FamilyDescription> createState() => _FamilyDescriptionState();
+  State<AllMember> createState() => _AllMemberState();
 }
 
-class _FamilyDescriptionState extends State<FamilyDescription> {
+class _AllMemberState extends State<AllMember> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
-      body: SafeArea(
-          child: ListView.builder(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 0,
+        leading: Icon(
+          Icons.groups_rounded,
+          color: Colors.black,
+        ),
+        title: Text(
+          "Erick\'s Family",
+          style: TextStyle(color: Colors.black),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: InkWell(
+              onTap: () {},
+              child: Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                      "images/user.png",
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+      body: ListView.builder(
         physics: BouncingScrollPhysics(),
         itemCount: 10,
         itemBuilder: (context, index) {
@@ -67,7 +98,7 @@ class _FamilyDescriptionState extends State<FamilyDescription> {
             ]),
           );
         },
-      )),
+      ),
     );
   }
 }
