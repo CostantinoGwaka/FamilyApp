@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class SchoolList extends StatefulWidget {
   SchoolList({Key key}) : super(key: key);

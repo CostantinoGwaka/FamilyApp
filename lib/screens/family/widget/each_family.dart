@@ -1,21 +1,16 @@
-import 'package:familyapp/screens/constants.dart';
 import 'package:familyapp/screens/family/widget/familiy_desc.dart';
-import 'package:familyapp/screens/helpdesk.dart';
-import 'package:familyapp/screens/latest_orders.dart';
-import 'package:familyapp/screens/location_slider.dart';
 import 'package:familyapp/screens/widget/bottom_sheet.dart';
 import 'package:familyapp/utilities/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class EachFamiy extends StatefulWidget {
-  String isSingle;
-  String name;
-  String location;
-  String gender;
-  String age;
-  String job;
+ final String isSingle;
+ final String name;
+final  String location;
+ final String gender;
+ final String age;
+ final  String job;
   EachFamiy({Key key, this.gender, this.location, this.age, this.job, this.isSingle, this.name}) : super(key: key);
 
   @override
@@ -36,11 +31,10 @@ class _EachFamiyState extends State<EachFamiy> {
   @override
   Widget build(BuildContext context) {
     // final birthday = DateTime(1967, 10, 12);
-    String datesss = '1990-05-12';
 
     print(widget.isSingle.toString());
     return Scaffold(
-        backgroundColor: Constants.primaryColor,
+        backgroundColor: Theme.of(context).primaryColor,
         body: Stack(
           clipBehavior: Clip.none,
           children: [
@@ -142,7 +136,7 @@ class _EachFamiyState extends State<EachFamiy> {
                           topLeft: Radius.circular(30.0),
                           topRight: Radius.circular(30.0),
                         ),
-                        color: Constants.scaffoldBackgroundColor,
+                        color: Colors.white,
                       ),
                       padding: EdgeInsets.symmetric(
                         vertical: 24.0,

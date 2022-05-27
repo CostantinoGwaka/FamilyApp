@@ -1,10 +1,9 @@
 import 'package:familyapp/screens/family/widget/each_family.dart';
-import 'package:familyapp/screens/helpdesk.dart';
 import 'package:familyapp/utilities/constant.dart';
 import 'package:flutter/material.dart';
 
 class FamilyDescription extends StatefulWidget {
-  String title;
+ final  String title;
   FamilyDescription({Key key, this.title}) : super(key: key);
 
   @override
