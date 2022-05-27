@@ -1,13 +1,11 @@
 import 'package:familyapp/screens/account/account.dart';
-import 'package:familyapp/screens/dashboard/widget/activity_desc.dart';
 import 'package:familyapp/screens/dashboard/widget/all_activity.dart';
+import 'package:familyapp/screens/dashboard/widget/recent_activities.dart';
+import 'package:familyapp/screens/dashboard/widget/recent_families.dart';
 import 'package:familyapp/screens/family/family.dart';
 import 'package:familyapp/utilities/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:percent_indicator/percent_indicator.dart';
-import 'package:familyapp/screens/list2.dart';
 
 class DashBoard extends StatefulWidget {
   @override
@@ -50,52 +48,52 @@ class DashboardScreen extends State<DashBoard> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.grey[200],
-            elevation: 0,
-            leading: Icon(
-              Icons.home,
-              color: Colors.black,
-            ),
-            title: Text(
-              "Erick\'s Family",
-              style: TextStyle(color: Colors.black),
-            ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Account(),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(
-                          "images/user.png",
-                        ),
-                        fit: BoxFit.cover,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          elevation: 0,
+          leading: Icon(
+            Icons.home,
+            color: Colors.black,
+          ),
+          title: Text(
+            "Erick\'s Family",
+            style: TextStyle(color: Colors.black),
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Account(),
                     ),
+                  );
+                },
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                        "images/user.png",
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(50.0)),
                   ),
                 ),
-              )
-            ],
-          ),
-          body: Material(
-            color: Colors.grey[200],
-            child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              ),
+            )
+          ],
+        ),
+        body: SafeArea(
+          child: Material(
               child: Column(
+            children: [
+              Stack(
                 children: [
                   Container(
                     padding: const EdgeInsets.only(
@@ -136,358 +134,97 @@ class DashboardScreen extends State<DashBoard> {
                             SizedBox(
                               height: 20,
                             ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: RichText(
-                                text: TextSpan(
-                                    text: "Familia 3 Zenye watu \nwengi zaidi!",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    )),
-                              ),
-                            ),
                           ],
-                        ),
-                        Container(
-                          height: deviceHeight(context) / 4.8,
-                          child: PageView(
-                            controller: PageController(viewportFraction: 0.9),
-                            scrollDirection: Axis.horizontal,
-                            pageSnapping: true,
-                            physics: BouncingScrollPhysics(),
-                            children: <Widget>[
-                              _buildEventsCard(title: "Costantino Family", subject: "Mbezi Bonyokwa", time: "Jumla : 100 | KE : 50 | ME : 50", imageList: images1, count: 22),
-                              _buildEventsCard(title: "Costantino Family", subject: "Mbezi Bonyokwa", time: "Jumla : 100 | KE : 50 | ME : 50", imageList: images1, count: 22),
-                              _buildEventsCard(title: "Costantino Family", subject: "Mbezi Bonyokwa", time: "Jumla : 100 | KE : 50 | ME : 50", imageList: images1, count: 22),
-                            ],
-                          ),
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(height: 15),
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(
-                      minWidth: double.infinity,
-                      maxHeight: double.infinity,
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    RichText(
+                      text: TextSpan(
+                        text: "Recent Families",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-                    child: Container(
-                      height: 425,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.0),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 0.5,
-                            spreadRadius: 0.0,
-                            offset: Offset(-1.0, -1.0), // shadow direction: bottom right
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AllFamily(),
+                          ),
+                        );
+                      },
+                      child: Row(
+                        children: [
+                          Text('View all'),
+                          manualSpacer(),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            size: 12,
                           )
                         ],
                       ),
-                      padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
-                      child: new SingleChildScrollView(
-                        child: new Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(height: 15),
-                            RichText(
-                              text: TextSpan(
-                                text: "Overview",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            Container(
-                              height: 200,
-                              child: PageView(
-                                controller: PageController(viewportFraction: 0.5, initialPage: 1),
-                                allowImplicitScrolling: true,
-                                scrollDirection: Axis.horizontal,
-                                // pageSnapping: false,
-
-                                physics: BouncingScrollPhysics(),
-                                children: <Widget>[
-                                  _buildItemCard(
-                                    title: "Familia",
-                                    total: "Jumla: 5",
-                                    used: "Watu: 3",
-                                    totalNum: 5,
-                                    usedNum: 3,
-                                    color: Colors.blue,
-                                    icon: FontAwesomeIcons.houseUser,
-                                    onTap: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => AllFamily()),
-                                    ),
-                                  ),
-                                  // _buildItemCard(
-                                  //     title: "Events",
-                                  //     total: "This month: 10",
-                                  //     used: "Replied: 5",
-                                  //     totalNum: 10,
-                                  //     usedNum: 5,
-                                  //     color: Colors.red,
-                                  //     icon: FontAwesomeIcons.campground,
-                                  //     onTap: () => Navigator.push(
-                                  //           context,
-                                  //           MaterialPageRoute(builder: (context) => Memberships()),
-                                  //         )),
-                                  _buildItemCard(
-                                    title: "Watu",
-                                    total: "Wanaume: 56",
-                                    used: "Wanawake: 2",
-                                    totalNum: 6,
-                                    usedNum: 2,
-                                    color: Colors.indigo,
-                                    icon: FontAwesomeIcons.userFriends,
-                                    onTap: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => SchoolList()),
-                                    ),
-                                  ),
-                                  // _buildItemCard(
-                                  //   title: "Mipango",
-                                  //   total: "Haijafanya: 4",
-                                  //   used: "Ishafanywa: 3",
-                                  //   totalNum: 4,
-                                  //   usedNum: 3,
-                                  //   color: Colors.orange,
-                                  //   icon: FontAwesomeIcons.comment,
-                                  //   onTap: () => Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(builder: (context) => Complaints()),
-                                  //   ),
-                                  // ),
-                                  // _buildItemCard(
-                                  //     title: "Visitors",
-                                  //     total: "Approved: 4",
-                                  //     used: "Cancelled: 1",
-                                  //     totalNum: 4,
-                                  //     usedNum: 1,
-                                  //     color: Colors.cyan,
-                                  //     icon: FontAwesomeIcons.peopleArrows,
-                                  //     onTap: () => Navigator.push(
-                                  //           context,
-                                  //           MaterialPageRoute(builder: (context) => VisitorsCode()),
-                                  //         )),
-                                  // _buildItemCard(
-                                  //   title: "Akaunti",
-                                  //   total: "Tap to view",
-                                  //   used: "",
-                                  //   totalNum: 1,
-                                  //   usedNum: 1,
-                                  //   color: Colors.deepPurple,
-                                  //   icon: FontAwesomeIcons.userCircle,
-                                  //   onTap: () => Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(builder: (context) => HelpDesk()),
-                                  //   ),
-                                  // ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(height: 15),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                RichText(
-                                  text: TextSpan(
-                                    text: "Recent Activity",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => AllActivities(),
-                                      ),
-                                    );
-                                  },
-                                  child: Text('Ona zote'),
-                                )
-                              ],
-                            ),
-                            manualStepper(),
-                            Card(
-                              shape: shape,
-                              child: ListTile(
-                                title: Text('Mtoto wa Constantino ameongezwa'),
-                                subtitle: Text('21/05/2020'),
-                                trailing: TextButton(
-                                  child: Text('Ona zaidi'),
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ActivityDescription(),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )),
-    );
-  }
-
-  Widget _buildItemCard({String title, String total, String used, int totalNum, int usedNum, Color color, IconData icon, GestureTapCallback onTap}) {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(20),
-        child: InkWell(
-          onTap: onTap,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              RichText(
-                  text: TextSpan(
-                children: [
-                  WidgetSpan(
-                      child: FaIcon(
-                    icon,
-                    color: color,
-                    size: 30,
-                  )),
-                ],
-              )),
-              SizedBox(height: 10),
-              RichText(
-                  text: TextSpan(
-                      text: title,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 19,
-                      ))),
-              SizedBox(height: 10),
-              Divider(
-                thickness: 1,
-              ),
-              RichText(
-                  text: TextSpan(
-                      text: total,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                      ))),
-              SizedBox(height: 10),
-              RichText(
-                  text: TextSpan(
-                      text: used,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                      ))),
-              SizedBox(height: 10),
-              LinearPercentIndicator(
-                width: 115,
-                lineHeight: 5,
-                percent: usedNum / totalNum,
-                backgroundColor: Colors.grey,
-                progressColor: color,
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildEventsCard({String title, String subject, String time, List<String> imageList, int count}) {
-    return GestureDetector(
-      child: Card(
-        elevation: 2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              RichText(
-                text: TextSpan(
-                  text: title,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              RichText(
-                text: TextSpan(
-                  children: [
-                    WidgetSpan(
-                      child: Icon(
-                        Icons.location_on,
-                        size: 16,
-                      ),
-                    ),
-                    WidgetSpan(
-                      child: Text(
-                        subject,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ),
+                    )
                   ],
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
-              RichText(
-                text: TextSpan(children: [
-                  WidgetSpan(
-                      child: Icon(
-                    Icons.groups_rounded,
-                    size: 16,
-                  )),
-                  TextSpan(
-                    text: "  " + time,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 12,
+              RecentFamilies(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    RichText(
+                      text: TextSpan(
+                        text: "Recent Activies",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-                  )
-                ]),
-              )
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AllActivities(),
+                          ),
+                        );
+                      },
+                      child: Row(
+                        children: [
+                          Text('View all'),
+                          manualSpacer(),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            size: 12,
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Expanded(child: RecentActivities())
             ],
-          ),
+          )),
         ),
       ),
     );
   }
+
+
 }

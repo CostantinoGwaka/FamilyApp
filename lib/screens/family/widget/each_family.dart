@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class EachFamiy extends StatefulWidget {
- final String isSingle;
- final String name;
-final  String location;
- final String gender;
- final String age;
- final  String job;
+  final String isSingle;
+  final String name;
+  final String location;
+  final String gender;
+  final String age;
+  final String job;
   EachFamiy({Key key, this.gender, this.location, this.age, this.job, this.isSingle, this.name}) : super(key: key);
 
   @override
@@ -87,7 +87,7 @@ class _EachFamiyState extends State<EachFamiy> {
                                 text: TextSpan(
                                   children: [
                                     TextSpan(
-                                      text: "  Karibu Familia ya,\n",
+                                      text: "Welcome to,\n",
                                       style: Theme.of(context).textTheme.headline6.copyWith(
                                             color: Colors.white,
                                             fontSize: 18,
@@ -95,11 +95,11 @@ class _EachFamiyState extends State<EachFamiy> {
                                           ),
                                     ),
                                     TextSpan(
-                                      text: widget.name,
+                                      text: widget.name + '\'s ' + "Family",
                                       style: Theme.of(context).textTheme.headline6.copyWith(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w600,
-                                            fontSize: 20,
+                                            fontSize: 16,
                                           ),
                                     )
                                   ],

@@ -1,3 +1,4 @@
+import 'package:familyapp/screens/bottom_nav/bottom_nav.dart';
 import 'package:familyapp/screens/widget/buttons.dart';
 import 'package:familyapp/screens/widget/input.dart';
 import 'package:familyapp/utilities/constant.dart';
@@ -5,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
 
-import 'package:familyapp/screens/dashboard/dashboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
@@ -268,7 +268,7 @@ class _LoginState extends State<Login> {
       action: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => DashBoard()),
+          MaterialPageRoute(builder: (context) => BottomNavigation()),
         );
       },
     );
