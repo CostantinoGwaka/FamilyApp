@@ -10,7 +10,7 @@ void main() {
     designSize: Size(375, 812),
     builder: () => MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Navigation Basics',
+      title: 'Family App',
       theme: ThemeData(
         scaffoldBackgroundColor: Constants.scaffoldBackgroundColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
