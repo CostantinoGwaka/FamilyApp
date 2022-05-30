@@ -23,12 +23,19 @@ class _BottomNavigationState extends State<BottomNavigation> {
         body: getBody(),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.shifting,
+          selectedItemColor: Theme.of(context).primaryColor,
+          unselectedItemColor: Colors.grey,
+          unselectedLabelStyle: TextStyle(
+            color: Colors.grey,
+          ),
           items: [
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.home_filled,
                 size: 25,
-                color: selectedIndex == 0 ? Theme.of(context).primaryColor : Colors.grey,
+                color: selectedIndex == 0
+                    ? Theme.of(context).primaryColor
+                    : Colors.grey,
               ),
               label: "Home",
             ),
@@ -36,7 +43,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
               icon: Icon(
                 Icons.groups_rounded,
                 size: 25,
-                color: selectedIndex == 1 ? Theme.of(context).primaryColor : Colors.grey,
+                color: selectedIndex == 1
+                    ? Theme.of(context).primaryColor
+                    : Colors.grey,
               ),
               label: "Member",
             ),
@@ -44,7 +53,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
               icon: Icon(
                 Icons.account_circle_sharp,
                 size: 25,
-                color: selectedIndex == 2 ? Theme.of(context).primaryColor : Colors.grey,
+                color: selectedIndex == 2
+                    ? Theme.of(context).primaryColor
+                    : Colors.grey,
               ),
               label: "Account",
             ),
