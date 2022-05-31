@@ -31,7 +31,7 @@ class _FamilyDescriptionState extends State<FamilyDescription> {
                 title: Text('John Constanino'),
                 subtitle: Row(
                   children: [
-                    Text('Me'),
+                    Text('Male'),
                     manualSpacer(),
                     Container(
                       height: 10,
