@@ -31,7 +31,7 @@ class _FamilyDescriptionState extends State<FamilyDescription> {
                 title: Text('John Constanino'),
                 subtitle: Row(
                   children: [
-                    Text('Me'),
+                    Text('Male'),
                     manualSpacer(),
                     Container(
                       height: 10,
@@ -41,11 +41,11 @@ class _FamilyDescriptionState extends State<FamilyDescription> {
                       ),
                     ),
                     manualSpacer(),
-                    Text('Miaka 17'),
+                    Text("17 year(s)"),
                   ],
                 ),
                 trailing: TextButton(
-                  child: Text('Ona zaidi'),
+                  child: Text('View more'),
                   onPressed: () {
                     Navigator.push(
                       context,
