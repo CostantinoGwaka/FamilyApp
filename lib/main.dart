@@ -9,7 +9,7 @@ void main() {
     designSize: Size(375, 812),
     builder: () => MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Navigation Basics',
+      title: 'Family App',
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: GoogleFonts.poppinsTextTheme(),
