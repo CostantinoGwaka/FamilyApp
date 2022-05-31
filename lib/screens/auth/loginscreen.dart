@@ -1,5 +1,10 @@
+import 'dart:convert';
+
+import 'package:familyapp/core/api/request_method.dart';
+import 'package:familyapp/core/api/services/data_service.dart';
 import 'package:familyapp/screens/bottom_nav/bottom_nav.dart';
 import 'package:familyapp/screens/widget/buttons.dart';
+import 'package:familyapp/screens/widget/global_widget.dart';
 import 'package:familyapp/screens/widget/input.dart';
 import 'package:familyapp/utilities/constant.dart';
 import 'package:flutter/material.dart';
@@ -144,22 +149,28 @@ class _LoginState extends State<Login> {
                                 UniversalInput(
                                   pre: '',
                                   controller: emailController,
-                                  onchanged: (val) {
-                                    setState(() {
-                                      username = val;
-                                    });
+                                  // onchanged: (val) {
+                                  //   setState(() {
+                                  //     username = val;
+                                  //   });
+                                  // },
+                                  validator: (String value) {
+                                    if (value.isEmpty) {
+                                      return 'Please enter your username';
+                                    }
+                                    return null;
                                   },
                                   keyboardType: TextInputType.emailAddress,
                                   prefixIcon: Icons.email,
-                                  sufixIcon: validateEmail(username)
-                                      ? const Icon(
-                                          Icons.check_circle,
-                                          color: Colors.green,
-                                        )
-                                      : const Icon(
-                                          Icons.check_circle,
-                                          color: Colors.grey,
-                                        ),
+                                  // sufixIcon: validateEmail(username)
+                                  //     ? const Icon(
+                                  //         Icons.check_circle,
+                                  //         color: Colors.green,
+                                  //       )
+                                  //     : const Icon(
+                                  //         Icons.check_circle,
+                                  //         color: Colors.grey,
+                                  //       ),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
                                     borderSide: const BorderSide(
@@ -167,7 +178,7 @@ class _LoginState extends State<Login> {
                                       width: 1.0,
                                     ),
                                   ),
-                                  hint: 'Enter your email',
+                                  hint: 'Enter your username',
                                   label: 'Email',
                                 ),
                                 const SizedBox(
@@ -257,20 +268,62 @@ class _LoginState extends State<Login> {
 
   Widget _submitButton() {
     return UniversalButton(
-      buttonHeight: 53,
-      radius: 20,
-      buttonColor: Theme.of(context).primaryColor,
-      child: Text(
-        'Login',
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      ),
-      buttonWidth: deviceWidth(context) / 1.2,
-      action: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => BottomNavigation()),
-        );
-      },
-    );
+        buttonHeight: 53,
+        radius: 20,
+        buttonColor: Theme.of(context).primaryColor,
+        child: Text(
+          'Login',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        buttonWidth: deviceWidth(context) / 1.2,
+        action: () async {
+          if (_formKey.currentState.validate()) {
+            universalLoading(context, content: 'Tafadhari subiri...');
+            var _loginCredential = {
+              "username": emailController.text,
+              "password": passController.text,
+            };
+
+            postMethod(
+              endpoint: "login.php",
+              bodyData: _loginCredential,
+            ).then((value) async {
+              print("jjcjcjjcjjcj data ${value['body'][0]}");
+
+              if (value['code'] == 200) {
+                var user = value['body'][0];
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                Map<String, dynamic> userdata = {
+                  'fullname': user['full_name'],
+                  'phonenumber': user['phonenumber'],
+                  'email': user['email'],
+                  'level': user['level'],
+                  'status': user['status'],
+                };
+                String encodedMap = json.encode(userdata);
+                prefs.setString('userdata', encodedMap);
+                String datas = prefs.getString('userdata');
+                Map<String, dynamic> decodedMap = json.decode(datas);
+                setState(() {
+                  DataService.userData = decodedMap;
+                });
+                Navigator.pop(context);
+                respondMessage(
+                  context,
+                  isSuccess: true,
+                  color: Theme.of(context).primaryColor,
+                  title: "Erick's Family",
+                  subTitle: "Welcome back, and enjoy it... ",
+                );
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BottomNavigation(),
+                  ),
+                );
+              }
+            });
+          }
+        });
   }
 }

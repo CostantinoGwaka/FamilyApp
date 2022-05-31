@@ -15,16 +15,15 @@ Future<dynamic> postMethod({EndPoint endPoint, dynamic bodyData, String endpoint
     );
 
     var responseDecoded = jsonDecode(response.body);
-
     if (response.statusCode == 200) {
       return {
         "code": response.statusCode,
-        "msg": responseDecoded['message'],
-        "body": responseDecoded['data'],
+        // "msg": responseDecoded['message'],
+        "body": responseDecoded,
       };
     } else {
       return {
-        "msg": responseDecoded['message'],
+        // "msg": responseDecoded['message'],
         "code": response.statusCode,
       };
     }

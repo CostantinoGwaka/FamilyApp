@@ -1,3 +1,4 @@
+import 'package:familyapp/core/api/services/data_service.dart';
 import 'package:familyapp/screens/account/account.dart';
 import 'package:familyapp/screens/dashboard/widget/all_activity.dart';
 import 'package:familyapp/screens/dashboard/widget/recent_activities.dart';
@@ -114,7 +115,7 @@ class DashboardScreen extends State<DashBoard> {
                                 children: [
                                   RichText(
                                     text: TextSpan(
-                                      text: "Hi, Erick Erick!",
+                                      text: "Hi, " + DataService.userData['fullname'],
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 16,

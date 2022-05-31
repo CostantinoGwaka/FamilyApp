@@ -15,10 +15,30 @@ class _BottomNavigationState extends State<BottomNavigation> {
   final Widget _home = DashBoard();
   final Widget _allMember = AllMember();
   final Widget _account = const Account();
+
+  DateTime currentBackPressTime;
+
+  Future<bool> onWillPop() {
+    DateTime now = DateTime.now();
+    if (currentBackPressTime == null || now.difference(currentBackPressTime) > Duration(seconds: 2)) {
+      currentBackPressTime = now;
+      final snack = SnackBar(
+        // backgroundColor: Theme.of(context).primaryColor,
+        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        content: Text('Tap again to exit'),
+        duration: Duration(seconds: 2),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snack);
+
+      return Future.value(false);
+    }
+    return Future.value(true);
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async => false,
+      onWillPop: onWillPop,
       child: Scaffold(
         body: getBody(),
         bottomNavigationBar: BottomNavigationBar(
@@ -29,9 +49,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
               icon: Icon(
                 Icons.home_filled,
                 size: 25,
-                color: selectedIndex == 0
-                    ? Theme.of(context).primaryColor
-                    : Colors.grey,
+                color: selectedIndex == 0 ? Theme.of(context).primaryColor : Colors.grey,
               ),
               label: "Home",
             ),
@@ -39,9 +57,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
               icon: Icon(
                 Icons.groups_rounded,
                 size: 25,
-                color: selectedIndex == 1
-                    ? Theme.of(context).primaryColor
-                    : Colors.grey,
+                color: selectedIndex == 1 ? Theme.of(context).primaryColor : Colors.grey,
               ),
               label: "Member",
             ),
@@ -49,9 +65,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
               icon: Icon(
                 Icons.account_circle_sharp,
                 size: 25,
-                color: selectedIndex == 2
-                    ? Theme.of(context).primaryColor
-                    : Colors.grey,
+                color: selectedIndex == 2 ? Theme.of(context).primaryColor : Colors.grey,
               ),
               label: "Account",
             ),
