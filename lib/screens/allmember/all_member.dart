@@ -75,9 +75,9 @@ class _AllMemberState extends State<AllMember> {
                     Text("17 year(s)"),
                   ],
                 ),
-                trailing: TextButton(
+                trailing: GestureDetector(
                   child: Text('View more'),
-                  onPressed: () {
+                  onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(

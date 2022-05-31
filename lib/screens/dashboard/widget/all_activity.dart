@@ -46,8 +46,8 @@ class _AllActivitiesState extends State<AllActivities> {
               ),
               title: const Text('One member added'),
               subtitle: const Text('Sunday, 23 March 2022'),
-              trailing: TextButton(
-                onPressed: () {
+              trailing: GestureDetector(
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(

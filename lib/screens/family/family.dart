@@ -140,7 +140,9 @@ class _AllFamilyState extends State<AllFamily> {
               margin: EdgeInsets.only(right: 15),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
-                border: Border.all(width: 3, color: secondary),
+                border: Border.all(
+                  width: 3,
+                ),
                 image: DecorationImage(image: AssetImage(schoolLists[index]['logoText']), fit: BoxFit.fill),
               ),
             ),
@@ -159,7 +161,6 @@ class _AllFamilyState extends State<AllFamily> {
                     children: <Widget>[
                       Icon(
                         Icons.location_on,
-                        color: secondary,
                         size: 20,
                       ),
                       SizedBox(
@@ -175,7 +176,6 @@ class _AllFamilyState extends State<AllFamily> {
                     children: <Widget>[
                       Icon(
                         Icons.group,
-                        color: secondary,
                         size: 20,
                       ),
                       SizedBox(

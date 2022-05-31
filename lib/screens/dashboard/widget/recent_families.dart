@@ -60,7 +60,9 @@ class _RecentFamiliesState extends State<RecentFamilies> {
                           margin: EdgeInsets.only(right: 15),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
-                            border: Border.all(width: 3, color: secondary),
+                            // border: Border.all(
+                            //   width: 3,
+                            // ),
                             image: DecorationImage(image: AssetImage(schoolLists[index]['logoText']), fit: BoxFit.fill),
                           ),
                         ),
@@ -69,7 +71,7 @@ class _RecentFamiliesState extends State<RecentFamilies> {
                           children: <Widget>[
                             Text(
                               schoolLists[index]['name'],
-                              style: TextStyle(color: primary, fontWeight: FontWeight.bold, fontSize: 18),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                             ),
                             SizedBox(
                               height: 6,
@@ -78,13 +80,12 @@ class _RecentFamiliesState extends State<RecentFamilies> {
                               children: <Widget>[
                                 Icon(
                                   Icons.location_on,
-                                  color: secondary,
                                   size: 20,
                                 ),
                                 SizedBox(
                                   width: 5,
                                 ),
-                                Text(schoolLists[index]['location'], style: TextStyle(color: primary, fontSize: 13, letterSpacing: .3)),
+                                Text(schoolLists[index]['location'], style: TextStyle(fontSize: 13, letterSpacing: .3)),
                               ],
                             ),
                             SizedBox(
@@ -94,13 +95,12 @@ class _RecentFamiliesState extends State<RecentFamilies> {
                               children: <Widget>[
                                 Icon(
                                   Icons.group,
-                                  color: secondary,
                                   size: 20,
                                 ),
                                 SizedBox(
                                   width: 5,
                                 ),
-                                Text(schoolLists[index]['type'], style: TextStyle(color: primary, fontSize: 13, letterSpacing: .3)),
+                                Text(schoolLists[index]['type'], style: TextStyle(fontSize: 13, letterSpacing: .3)),
                               ],
                             ),
                           ],

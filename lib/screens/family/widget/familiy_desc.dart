@@ -44,9 +44,9 @@ class _FamilyDescriptionState extends State<FamilyDescription> {
                     Text("17 year(s)"),
                   ],
                 ),
-                trailing: TextButton(
+                trailing: GestureDetector(
                   child: Text('View more'),
-                  onPressed: () {
+                  onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(

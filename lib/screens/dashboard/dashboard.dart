@@ -156,8 +156,8 @@ class DashboardScreen extends State<DashBoard> {
                         ),
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {
+                    GestureDetector(
+                      onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -195,8 +195,8 @@ class DashboardScreen extends State<DashBoard> {
                         ),
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {
+                    GestureDetector(
+                      onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -225,6 +225,4 @@ class DashboardScreen extends State<DashBoard> {
       ),
     );
   }
-
-
 }

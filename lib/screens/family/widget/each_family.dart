@@ -290,9 +290,9 @@ class _EachFamiyState extends State<EachFamiy> {
                                                         ),
                                                         Align(
                                                           alignment: Alignment.bottomRight,
-                                                          child: TextButton(
+                                                          child: GestureDetector(
                                                             child: Text('View more'),
-                                                            onPressed: () {
+                                                            onTap: () {
                                                               Navigator.push(
                                                                 context,
                                                                 MaterialPageRoute(
@@ -377,9 +377,9 @@ class _EachFamiyState extends State<EachFamiy> {
                                                         ),
                                                         Align(
                                                           alignment: Alignment.bottomRight,
-                                                          child: TextButton(
+                                                          child: GestureDetector(
                                                             child: Text('View more'),
-                                                            onPressed: () {
+                                                            onTap: () {
                                                               Navigator.push(
                                                                 context,
                                                                 MaterialPageRoute(

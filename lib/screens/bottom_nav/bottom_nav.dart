@@ -22,7 +22,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
       child: Scaffold(
         body: getBody(),
         bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.shifting,
+          currentIndex: selectedIndex,
+          type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
               icon: Icon(

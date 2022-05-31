@@ -12,8 +12,7 @@ class RecentActivities extends StatefulWidget {
 class _RecentActivitiesState extends State<RecentActivities> {
   @override
   Widget build(BuildContext context) {
-    return 
-    ListView.builder(
+    return ListView.builder(
       physics: physics,
       scrollDirection: Axis.vertical,
       itemCount: 5,
@@ -35,8 +34,8 @@ class _RecentActivitiesState extends State<RecentActivities> {
           ),
           title: const Text('One member added'),
           subtitle: const Text('Sunday, 23 March 2022'),
-          trailing: TextButton(
-            onPressed: () {
+          trailing: GestureDetector(
+            onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
