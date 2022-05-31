@@ -111,11 +111,11 @@ class _AccountState extends State<Account> {
                         ),
                       ),
                       child: Icon(
-                        Icons.person,
+                        Icons.settings_outlined,
                         color: Theme.of(context).primaryColor,
                       ),
                     ),
-                    title: Text('My Account'),
+                    title: Text('Settings'),
                     trailing: IconButton(
                       onPressed: () {},
                       icon: Icon(
@@ -125,10 +125,67 @@ class _AccountState extends State<Account> {
                     ),
                   ),
                 ),
+                // Align(
+                //   alignment: Alignment.bottomLeft,
+                //   child: Card(
+                //     child: ListTile(
+                //       leading: Container(
+                //         height: 30,
+                //         width: 30,
+                //         decoration: BoxDecoration(
+                //           color: Colors.red.withOpacity(0.2),
+                //           borderRadius: const BorderRadius.all(
+                //             Radius.circular(10),
+                //           ),
+                //         ),
+                //         child: const Icon(
+                //           Icons.exit_to_app,
+                //           size: 20,
+                //           color: Colors.red,
+                //         ),
+                //       ),
+                //       title: const Text(
+                //         'Log out',
+                //         style: TextStyle(
+                //           color: Colors.red,
+                //         ),
+                //       ),
+                //       onTap: () {},
+                //     ),
+                //   ),
+                // )
               ],
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Card(
+          child: ListTile(
+            leading: Container(
+              height: 30,
+              width: 30,
+              decoration: BoxDecoration(
+                color: Colors.red.withOpacity(0.2),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              child: const Icon(
+                Icons.exit_to_app,
+                size: 20,
+                color: Colors.red,
+              ),
+            ),
+            title: const Text(
+              'Log out',
+              style: TextStyle(
+                color: Colors.red,
+              ),
+            ),
+            onTap: () {},
+          ),
+        ),
       ),
     );
   }

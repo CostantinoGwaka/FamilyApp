@@ -155,7 +155,7 @@ class _EachFamiyState extends State<EachFamiy> {
                                         horizontal: 24.0,
                                       ),
                                       child: Text(
-                                        "Taarifa za familia",
+                                        "Family's Information",
                                         style: TextStyle(
                                           color: Color.fromRGBO(19, 22, 33, 1),
                                           fontSize: 18.0,
@@ -176,7 +176,7 @@ class _EachFamiyState extends State<EachFamiy> {
                                                     context,
                                                     name: 'Constantino Gwaka',
                                                     age: '1995-12-21',
-                                                    title: 'Mume',
+                                                    title: 'Father',
                                                     gender: 'Me',
                                                     job: 'IT',
                                                     phone: '0712826083',
@@ -188,7 +188,7 @@ class _EachFamiyState extends State<EachFamiy> {
                                                       maxRadius: 35,
                                                       backgroundImage: AssetImage('images/user.png'),
                                                     ),
-                                                    Text('Baba (Hai)')
+                                                    Text('Father (Alive)')
                                                   ],
                                                 ),
                                               ),
@@ -198,7 +198,7 @@ class _EachFamiyState extends State<EachFamiy> {
                                                     context,
                                                     name: 'Angel Swila',
                                                     age: '1998-09-12',
-                                                    title: 'Mke',
+                                                    title: 'Mother',
                                                     gender: 'Ke',
                                                     job: "Mfanyabiashara",
                                                     phone: '0678978678',
@@ -210,7 +210,7 @@ class _EachFamiyState extends State<EachFamiy> {
                                                       maxRadius: 35,
                                                       backgroundImage: AssetImage('images/user.png'),
                                                     ),
-                                                    Text('Mama' + "(Amefariki)")
+                                                    Text('Mother' + "(Desease)")
                                                   ],
                                                 ),
                                               ),
@@ -233,7 +233,7 @@ class _EachFamiyState extends State<EachFamiy> {
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                "Taarifa za Watoto",
+                                                "Children's Information",
                                                 style: TextStyle(
                                                   color: Color.fromRGBO(19, 22, 33, 1),
                                                   fontSize: 18.0,
@@ -252,12 +252,12 @@ class _EachFamiyState extends State<EachFamiy> {
                                                           mainAxisAlignment: MainAxisAlignment.center,
                                                           children: [
                                                             Text(
-                                                              'Jumla:',
+                                                              'Total:',
                                                               style: TextStyle(fontSize: 18),
                                                             ),
                                                             manualSpacer(),
                                                             Text(
-                                                              'Watoto 9',
+                                                              '9 Children',
                                                               style: TextStyle(fontSize: 18),
                                                             ),
                                                           ],
@@ -267,7 +267,7 @@ class _EachFamiyState extends State<EachFamiy> {
                                                           children: [
                                                             Column(
                                                               children: [
-                                                                Text('Kiume'),
+                                                                Text('Male'),
                                                                 Text('5'),
                                                               ],
                                                             ),
@@ -282,7 +282,7 @@ class _EachFamiyState extends State<EachFamiy> {
                                                             manualSpacer(step: 10),
                                                             Column(
                                                               children: [
-                                                                Text('Kike'),
+                                                                Text('Female'),
                                                                 Text('4'),
                                                               ],
                                                             ),
@@ -291,13 +291,13 @@ class _EachFamiyState extends State<EachFamiy> {
                                                         Align(
                                                           alignment: Alignment.bottomRight,
                                                           child: TextButton(
-                                                            child: Text('Ona zaidi'),
+                                                            child: Text('View more'),
                                                             onPressed: () {
                                                               Navigator.push(
                                                                 context,
                                                                 MaterialPageRoute(
                                                                     builder: (context) => FamilyDescription(
-                                                                          title: 'Taarifa za Watoto',
+                                                                          title: "Children's Information",
                                                                         )),
                                                               );
                                                             },
@@ -319,7 +319,7 @@ class _EachFamiyState extends State<EachFamiy> {
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                "Taarifa za Wajukuu",
+                                                "Gland children's Informations",
                                                 style: TextStyle(
                                                   color: Color.fromRGBO(19, 22, 33, 1),
                                                   fontSize: 18.0,
@@ -339,12 +339,12 @@ class _EachFamiyState extends State<EachFamiy> {
                                                           mainAxisAlignment: MainAxisAlignment.center,
                                                           children: [
                                                             Text(
-                                                              'Jumla:',
+                                                              'Total:',
                                                               style: TextStyle(fontSize: 18),
                                                             ),
                                                             manualSpacer(),
                                                             Text(
-                                                              'Watoto 9',
+                                                              '9',
                                                               style: TextStyle(fontSize: 18),
                                                             ),
                                                           ],
@@ -354,7 +354,7 @@ class _EachFamiyState extends State<EachFamiy> {
                                                           children: [
                                                             Column(
                                                               children: [
-                                                                Text('Kiume'),
+                                                                Text('Male'),
                                                                 Text('5'),
                                                               ],
                                                             ),
@@ -369,7 +369,7 @@ class _EachFamiyState extends State<EachFamiy> {
                                                             manualSpacer(step: 10),
                                                             Column(
                                                               children: [
-                                                                Text('Kike'),
+                                                                Text('Female'),
                                                                 Text('4'),
                                                               ],
                                                             ),
@@ -378,13 +378,13 @@ class _EachFamiyState extends State<EachFamiy> {
                                                         Align(
                                                           alignment: Alignment.bottomRight,
                                                           child: TextButton(
-                                                            child: Text('Ona zaidi'),
+                                                            child: Text('View more'),
                                                             onPressed: () {
                                                               Navigator.push(
                                                                 context,
                                                                 MaterialPageRoute(
                                                                     builder: (context) => FamilyDescription(
-                                                                          title: 'Taarifa za Wajukuu',
+                                                                          title: "Gland children Information",
                                                                         )),
                                                               );
                                                             },
@@ -411,7 +411,7 @@ class _EachFamiyState extends State<EachFamiy> {
                                         horizontal: 24.0,
                                       ),
                                       child: Text(
-                                        "Taarifa Binafsi",
+                                        "Personal Information",
                                         style: TextStyle(
                                           color: Color.fromRGBO(19, 22, 33, 1),
                                           fontSize: 18.0,
@@ -436,7 +436,7 @@ class _EachFamiyState extends State<EachFamiy> {
                                             ),
                                             ListTile(
                                               leading: Icon(Icons.date_range),
-                                              title: Text('Miaka ' + agedate(date: widget.age).toString()),
+                                              title: Text(agedate(date: widget.age).toString() + 'Years '),
                                             ),
                                           ]),
                                         ),
@@ -459,7 +459,7 @@ class _EachFamiyState extends State<EachFamiy> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Taarifa za mawasiliano",
+                                  "Contact Informations",
                                   style: TextStyle(
                                     color: Color.fromRGBO(19, 22, 33, 1),
                                     fontSize: 18.0,
@@ -560,7 +560,7 @@ class _EachFamiyState extends State<EachFamiy> {
                 children: [
                   manualStepper(step: 10),
                   Text(
-                    "Taarifa za " + title,
+                    title + "'s " + "Information",
                     style: TextStyle(
                       color: Color.fromRGBO(19, 22, 33, 1),
                       fontSize: 18.0,
@@ -592,7 +592,7 @@ class _EachFamiyState extends State<EachFamiy> {
                   ),
                   ListTile(
                     leading: Icon(Icons.date_range),
-                    title: Text('Miaka ' + agedate(date: age).toString()),
+                    title: Text(agedate(date: age).toString() + ' Years'),
                   ),
                 ],
               ),

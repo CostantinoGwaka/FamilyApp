@@ -16,15 +16,15 @@ class _AllFamilyState extends State<AllFamily> {
   final secondary = Colors.deepOrange;
 
   final List<Map> schoolLists = [
-    {"single": "false", "name": "Constanino Gwaka", "location": "Bonyokwa - 119", "type": "Watu: 6", "logoText": "images/user.png"},
-    {"single": "true", "name": "Cosmas Paulo", "location": "Mbezi - 289", "type": "Watu: 5", "logoText": "images/user.png"},
-    {"single": "true", "name": "Samweli Gwaka", "location": "Residential park, Lane - 2", "type": "Watu: 3", "logoText": "images/user.png"},
-    {"single": "false", "name": "Angela Cosmas", "location": "Tabata - 453", "type": "Watu: 9", "logoText": "images/user.png"},
-    {"single": "false", "name": "Angela Cosmas", "location": "Tabata - 453", "type": "Watu: 9", "logoText": "images/user.png"},
-    {"single": "false", "name": "Angela Cosmas", "location": "Tabata - 453", "type": "Watu: 9", "logoText": "images/user.png"},
-    {"single": "false", "name": "Angela Cosmas", "location": "Tabata - 453", "type": "Watu: 9", "logoText": "images/user.png"},
-    {"single": "false", "name": "Angela Cosmas", "location": "Tabata - 453", "type": "Watu: 9", "logoText": "images/user.png"},
-    {"single": "false", "name": "victor Salim", "location": "Posta - 763", "type": "Watu: 3", "logoText": "images/user.png"},
+    {"single": "false", "name": "Constanino Gwaka", "location": "Bonyokwa - 119", "type": "Total: 6", "logoText": "images/user.png"},
+    {"single": "true", "name": "Cosmas Paulo", "location": "Mbezi - 289", "type": "Total: 5", "logoText": "images/user.png"},
+    {"single": "true", "name": "Samweli Gwaka", "location": "Residential park, Lane - 2", "type": "Total: 3", "logoText": "images/user.png"},
+    {"single": "false", "name": "Angela Cosmas", "location": "Tabata - 453", "type": "Total: 9", "logoText": "images/user.png"},
+    {"single": "false", "name": "Angela Cosmas", "location": "Tabata - 453", "type": "Total: 9", "logoText": "images/user.png"},
+    {"single": "false", "name": "Angela Cosmas", "location": "Tabata - 453", "type": "Total: 9", "logoText": "images/user.png"},
+    {"single": "false", "name": "Angela Cosmas", "location": "Tabata - 453", "type": "Total: 9", "logoText": "images/user.png"},
+    {"single": "false", "name": "Angela Cosmas", "location": "Tabata - 453", "type": "Total: 9", "logoText": "images/user.png"},
+    {"single": "false", "name": "victor Salim", "location": "Posta - 763", "type": "Total: 3", "logoText": "images/user.png"},
   ];
   @override
   Widget build(BuildContext context) {
@@ -53,24 +53,39 @@ class _AllFamilyState extends State<AllFamily> {
                       height: 10,
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20,),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                      ),
                       child: Material(
                         elevation: 5.0,
-                        borderRadius: BorderRadius.all(Radius.circular(30),),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30),
+                        ),
                         child: TextField(
                           // controller: TextEditingController(text: locations[0]),
                           cursorColor: Theme.of(context).primaryColor,
                           style: dropdownMenuItem,
                           decoration: InputDecoration(
-                              hintText: "Search Families or member",
-                              hintStyle: TextStyle(color: Colors.black38, fontSize: 16,),
-                              prefixIcon: Material(
-                                elevation: 0.0,
-                                borderRadius: BorderRadius.all(Radius.circular(30),),
-                                child: Icon(Icons.search,),
+                            hintText: "Search Families or member",
+                            hintStyle: TextStyle(
+                              color: Colors.black38,
+                              fontSize: 16,
+                            ),
+                            prefixIcon: Material(
+                              elevation: 0.0,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(30),
                               ),
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.symmetric(horizontal: 25, vertical: 13,),),
+                              child: Icon(
+                                Icons.search,
+                              ),
+                            ),
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 25,
+                              vertical: 13,
+                            ),
+                          ),
                         ),
                       ),
                     ),
