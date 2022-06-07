@@ -10,6 +10,7 @@ class UniversalInput extends StatelessWidget {
   final String fontStyle;
   final String fontFamily;
   final String label;
+  final String helperText;
   final String initialValue;
   final int maxLines;
   final int minLines;
@@ -43,6 +44,7 @@ class UniversalInput extends StatelessWidget {
   final double helperSize;
   final String Function(String) validator;
   const UniversalInput({
+    this.helperText,
     this.action,
     this.fontFamily,
     this.labelWight,
@@ -112,6 +114,7 @@ class UniversalInput extends StatelessWidget {
         inputFormatters: inputFormatter,
         smartQuotesType: SmartQuotesType.enabled,
         decoration: InputDecoration(
+          helperText: helperText,
           floatingLabelBehavior: FloatingLabelBehavior.always,
           hintStyle: TextStyle(color: hintColor, fontFamily: fontFamily, fontSize: hintSize),
           contentPadding: padding,

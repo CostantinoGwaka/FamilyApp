@@ -59,7 +59,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 size: 25,
                 color: selectedIndex == 1 ? Theme.of(context).primaryColor : Colors.grey,
               ),
-              label: "Member",
+              label: "Generation",
             ),
             BottomNavigationBarItem(
               icon: Icon(

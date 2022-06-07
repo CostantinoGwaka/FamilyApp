@@ -141,7 +141,8 @@ class _EachFamiyState extends State<EachFamiy> {
                       padding: EdgeInsets.symmetric(
                         vertical: 24.0,
                       ),
-                      child: Column(
+                      child: 
+                      Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

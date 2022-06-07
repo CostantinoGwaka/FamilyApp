@@ -2,8 +2,8 @@ import 'package:familyapp/core/api/services/data_service.dart';
 import 'package:familyapp/screens/account/account.dart';
 import 'package:familyapp/screens/dashboard/widget/all_activity.dart';
 import 'package:familyapp/screens/dashboard/widget/recent_activities.dart';
-import 'package:familyapp/screens/dashboard/widget/recent_families.dart';
-import 'package:familyapp/screens/family/family.dart';
+import 'package:familyapp/screens/events/events.dart';
+import 'package:familyapp/screens/family/my_family.dart';
 import 'package:familyapp/utilities/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -51,15 +51,15 @@ class DashboardScreen extends State<DashBoard> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          // backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
           leading: Icon(
             Icons.home,
-            color: Colors.black,
+            // color: Colors.black,
           ),
           title: Text(
-            "Erick\'s Family",
-            style: TextStyle(color: Colors.black),
+            "Misingati\'s Generation",
+            // style: TextStyle(color: Colors.black),
           ),
           actions: [
             Padding(
@@ -108,6 +108,7 @@ class DashboardScreen extends State<DashBoard> {
                       children: [
                         Column(
                           children: [
+                            manualStepper(),
                             Align(
                               alignment: Alignment.topLeft,
                               child: Column(
@@ -149,11 +150,94 @@ class DashboardScreen extends State<DashBoard> {
                   children: [
                     RichText(
                       text: TextSpan(
-                        text: "Recent Families",
+                        text: "Quick Links",
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) => AllFamily(),
+                    //       ),
+                    //     );
+                    //   },
+                    //   child: Row(
+                    //     children: [
+                    //       Text('View all'),
+                    //       manualSpacer(),
+                    //       Icon(
+                    //         Icons.arrow_forward_ios,
+                    //         size: 12,
+                    //       )
+                    //     ],
+                    //   ),
+                    // )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  18,
+                  0,
+                  18,
+                  0,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MyFamiliy(),
+                          ),
+                        );
+                      },
+                      child: Card(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(
+                            8.0,
+                          ),
+                          child: SizedBox(
+                            height: 70,
+                            width: deviceWidth(context) / 3,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                                    Text(
+                                      "My Family",
+                                    ),
+                                    manualSpacer(),
+                                    Text(
+                                      "2 Member",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ]),
+                                ),
+                                Align(
+                                  alignment: Alignment.bottomRight,
+                                  child: Icon(
+                                    Icons.group,
+                                    size: 30,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -162,25 +246,55 @@ class DashboardScreen extends State<DashBoard> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => AllFamily(),
+                            builder: (context) => EventScreen(),
                           ),
                         );
                       },
-                      child: Row(
-                        children: [
-                          Text('View all'),
-                          manualSpacer(),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            size: 12,
-                          )
-                        ],
+                      child: Card(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(
+                            8.0,
+                          ),
+                          child: SizedBox(
+                            height: 70,
+                            width: deviceWidth(context) / 3,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                                    Text(
+                                      "Events",
+                                    ),
+                                    manualSpacer(),
+                                    Text(
+                                      "2 Event(s)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ]),
+                                ),
+                                Align(
+                                  alignment: Alignment.bottomRight,
+                                  child: Icon(
+                                    Icons.calendar_today_outlined,
+                                    size: 30,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
-              RecentFamilies(),
+              // RecentFamilies(),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -188,7 +302,7 @@ class DashboardScreen extends State<DashBoard> {
                   children: [
                     RichText(
                       text: TextSpan(
-                        text: "Recent Activies",
+                        text: "Recent Events",
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 16,
@@ -219,7 +333,7 @@ class DashboardScreen extends State<DashBoard> {
                   ],
                 ),
               ),
-              Expanded(child: RecentActivities())
+              Expanded(child: RecentEvents())
             ],
           )),
         ),

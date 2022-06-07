@@ -16,11 +16,14 @@ class _AccountState extends State<Account> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        title: Text('Account'),
+        centerTitle: true,
+        // backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
       ),
       body: Column(
         children: [
+          manualStepper(step: 20),
           Center(
             child: Column(
               children: [

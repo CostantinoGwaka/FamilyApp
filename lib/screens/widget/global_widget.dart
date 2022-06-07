@@ -1,10 +1,6 @@
-
 import 'package:achievement_view/achievement_view.dart';
 import 'package:familyapp/screens/widget/ui_helpers.dart';
 import 'package:flutter/material.dart';
-
-
-
 
 void respondMessage(
   BuildContext context, {
@@ -43,7 +39,6 @@ void respondMessage(
   )..show();
 }
 
-
 void universalLoading(
   BuildContext context, {
   AlignmentGeometry alignment,
@@ -52,10 +47,8 @@ void universalLoading(
   showDialog(
     context: context,
     barrierDismissible: false,
-
     builder: (BuildContext context) {
       return Dialog(
-        
         alignment: alignment ?? Alignment.center,
         elevation: 0,
         shape: RoundedRectangleBorder(
@@ -69,13 +62,16 @@ void universalLoading(
               // crossAxisAlignment: CrossAxisAlignment.start,
               // mainAxisSize: MainAxisSize.min,
               children: [
-                const CircularProgressIndicator(
-                  valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF09944E)),
+                CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
                 ),
                 UIHelper.horizontalSpace(width: 12),
                 Text(
                   content,
-                  style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 14),
+                  style: Theme.of(context).textTheme.headline1.copyWith(
+                        fontSize: 14,
+                        color: Colors.black,
+                      ),
                 ),
               ],
             ),
@@ -83,45 +79,6 @@ void universalLoading(
         ),
       );
     },
-  );
-}
-
-Widget loadingWidget() {
-  return Row(
-    crossAxisAlignment: CrossAxisAlignment.center,
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      const CircularProgressIndicator(
-        strokeWidth: 1.5,
-        valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF09944E)),
-      ),
-      const SizedBox(
-        width: 25,
-      ),
-      const Text("Loading..."),
-    ],
-  );
-}
-
-Widget appBarDefault() {
-  return AppBar(
-    automaticallyImplyLeading: false,
-    title: Text(
-      'JATU PESA',
-      style: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-    actions: [
-      Padding(
-        padding: const EdgeInsets.only(right: 15),
-        child: CircleAvatar(
-          radius: 20,
-          backgroundImage: AssetImage('assets/images/user.png'),
-        ),
-      )
-    ],
   );
 }
 
@@ -147,7 +104,7 @@ class NoData extends StatelessWidget {
           UIHelper.verticalSpace(height: 25),
           Text(
             title,
-            style: Theme.of(context).textTheme.headline3,
+            style: Theme.of(context).textTheme.headline3.copyWith(fontSize: 24, color: Colors.black),
           ),
           UIHelper.verticalSpace(height: 10),
           Padding(
@@ -155,7 +112,6 @@ class NoData extends StatelessWidget {
             child: Text(
               description,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.subtitle2,
             ),
           ),
         ],

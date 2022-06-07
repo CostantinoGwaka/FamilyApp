@@ -15,6 +15,7 @@ Future<dynamic> postMethod({EndPoint endPoint, dynamic bodyData, String endpoint
     );
 
     var responseDecoded = jsonDecode(response.body);
+    print("jfjfjjfjfjf $responseDecoded");
     if (response.statusCode == 200) {
       return {
         "code": response.statusCode,

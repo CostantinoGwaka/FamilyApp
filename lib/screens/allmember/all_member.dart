@@ -15,15 +15,16 @@ class _AllMemberState extends State<AllMember> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        // backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
+        centerTitle: true,
         leading: Icon(
           Icons.groups_rounded,
-          color: Colors.black,
+          // color: Colors.black,
         ),
         title: Text(
-          "Erick\'s Family",
-          style: TextStyle(color: Colors.black),
+          "Clan's Member",
+          // style: TextStyle(color: Colors.black),
         ),
         actions: [
           Padding(

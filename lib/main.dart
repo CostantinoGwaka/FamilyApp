@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:familyapp/core/api/services/data_service.dart';
+import 'package:familyapp/screens/auth/pre_auth.dart';
 import 'package:familyapp/screens/widget/ui_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -55,9 +56,9 @@ class _MyAppState extends State<MyApp> {
               title: 'Family App',
               theme: ThemeData(
                 visualDensity: VisualDensity.adaptivePlatformDensity,
-                textTheme: GoogleFonts.poppinsTextTheme(),
+                // textTheme: GoogleFonts.poppinsTextTheme(),
               ),
-              home: Login(),
+              home: PreAuth(),
             );
           }
         });
@@ -82,10 +83,10 @@ class Splash extends StatelessWidget {
               text: TextSpan(
                 children: [
                   WidgetSpan(
-                    child: Text("Erick's ", style: Theme.of(context).textTheme.headline6.copyWith(fontSize: 40, color: Colors.white, fontStyle: FontStyle.italic)),
+                    child: Text("MSINGAKI GENERATION ", style: Theme.of(context).textTheme.headline6.copyWith(fontSize: 20, color: Colors.white, fontStyle: FontStyle.italic)),
                   ),
                   WidgetSpan(
-                    child: Text("Family", style: Theme.of(context).textTheme.headline6.copyWith(fontSize: 40, color: Colors.white, fontStyle: FontStyle.italic)),
+                    child: Text("FAMILY", style: Theme.of(context).textTheme.headline6.copyWith(fontSize: 20, color: Colors.white, fontStyle: FontStyle.italic)),
                   ),
                 ],
               ),
