@@ -14,14 +14,14 @@ class _AllActivitiesState extends State<AllActivities> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          iconTheme: IconTheme.of(context).copyWith(
-            color: Colors.black,
-          ),
+          // iconTheme: IconTheme.of(context).copyWith(
+          //   color: Colors.black,
+          // ),
           elevation: 0,
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          // backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           title: Text(
-            'All Activity (s)',
-            style: Theme.of(context).textTheme.headline6,
+            'All Event(s)',
+            // style: Theme.of(context).textTheme.headline6,
           ),
         ),
         body: ListView.builder(
@@ -44,7 +44,7 @@ class _AllActivitiesState extends State<AllActivities> {
                   color: Theme.of(context).primaryColor,
                 ),
               ),
-              title: const Text('One member added'),
+              title: const Text('One member added hdh dhdhd dhhd '),
               subtitle: const Text('Sunday, 23 March 2022'),
               trailing: GestureDetector(
                 onTap: () {

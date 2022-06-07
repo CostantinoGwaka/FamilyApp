@@ -94,7 +94,6 @@ class _LoginState extends State<Login> {
         setState(() {});
       },
       child: Scaffold(
-          resizeToAvoidBottomInset: false,
           backgroundColor: Colors.white,
           body: SafeArea(
               child: SingleChildScrollView(
@@ -127,10 +126,10 @@ class _LoginState extends State<Login> {
                   Container(
                     alignment: Alignment.center,
                     child: Text(
-                      'Erick\'s Family',
+                      "MSINGAKI's GENERATION",
                       style: TextStyle(
                         fontFamily: 'OpenSans',
-                        fontSize: 28,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -173,8 +172,8 @@ class _LoginState extends State<Login> {
                                   //       ),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
-                                    borderSide: const BorderSide(
-                                      color: Colors.teal,
+                                    borderSide:  BorderSide(
+                                      color: Theme.of(context).primaryColor,
                                       width: 1.0,
                                     ),
                                   ),
@@ -189,8 +188,8 @@ class _LoginState extends State<Login> {
                                   controller: passController,
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
-                                    borderSide: const BorderSide(
-                                      color: Colors.teal,
+                                    borderSide:  BorderSide(
+                                      color: Theme.of(context).primaryColor,
                                       width: 1.0,
                                     ),
                                   ),
@@ -278,7 +277,7 @@ class _LoginState extends State<Login> {
         buttonWidth: deviceWidth(context) / 1.2,
         action: () async {
           if (_formKey.currentState.validate()) {
-            universalLoading(context, content: 'Tafadhari subiri...');
+            universalLoading(context, content: 'Please wait...');
             var _loginCredential = {
               "username": emailController.text,
               "password": passController.text,
@@ -288,40 +287,44 @@ class _LoginState extends State<Login> {
               endpoint: "login.php",
               bodyData: _loginCredential,
             ).then((value) async {
-              print("jjcjcjjcjjcj data ${value['body'][0]}");
-
-              if (value['code'] == 200) {
-                var user = value['body'][0];
-                SharedPreferences prefs = await SharedPreferences.getInstance();
-                Map<String, dynamic> userdata = {
-                  'fullname': user['full_name'],
-                  'phonenumber': user['phonenumber'],
-                  'email': user['email'],
-                  'level': user['level'],
-                  'status': user['status'],
-                };
-                String encodedMap = json.encode(userdata);
-                prefs.setString('userdata', encodedMap);
-                String datas = prefs.getString('userdata');
-                Map<String, dynamic> decodedMap = json.decode(datas);
-                setState(() {
-                  DataService.userData = decodedMap;
-                });
-                Navigator.pop(context);
-                respondMessage(
-                  context,
-                  isSuccess: true,
-                  color: Theme.of(context).primaryColor,
-                  title: "Erick's Family",
-                  subTitle: "Welcome back, and enjoy it... ",
-                );
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BottomNavigation(),
-                  ),
-                );
-              }
+              print(value);
+              // if (value['code'] == 200) {
+              // var user = value['body'][0];
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              Map<String, dynamic> userdata = {
+                'fullname': "Cosmas Paulo",
+                'phonenumber': "0712826083",
+                'email': 'cosmasp59@gmail.com',
+                'level': "1",
+                'status': "active",
+                // 'fullname': user['full_name'],
+                // 'phonenumber': user['phonenumber'],
+                // 'email': user['email'],
+                // 'level': user['level'],
+                // 'status': user['status'],
+              };
+              String encodedMap = json.encode(userdata);
+              prefs.setString('userdata', encodedMap);
+              String datas = prefs.getString('userdata');
+              Map<String, dynamic> decodedMap = json.decode(datas);
+              setState(() {
+                DataService.userData = decodedMap;
+              });
+              Navigator.pop(context);
+              respondMessage(
+                context,
+                isSuccess: true,
+                color: Theme.of(context).primaryColor,
+                title: "Erick's Family",
+                subTitle: "Welcome back, and enjoy it... ",
+              );
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BottomNavigation(),
+                ),
+              );
+              // }
             });
           }
         });

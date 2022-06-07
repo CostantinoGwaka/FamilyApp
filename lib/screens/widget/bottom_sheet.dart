@@ -28,3 +28,40 @@ void universalBottomSheet(
   );
 }
 
+void universalWithStateDialog(BuildContext context,
+    {Widget title,
+    Widget body,
+    bool dismiss = false,
+    bool showSecondButton = true,
+    bool showThirdButton = false,
+    String thirdButtonLabel,
+    Function thirdButtonPressed,
+    Function buttonPressed,
+    String buttonLabel,
+    Color colors,
+    double elevation,
+    double radius,
+    double buttonWidth,
+    double buttonHeight,
+    ValueKey valueKey,
+    ButtonStyle buttonStyle,
+    TextStyle style,
+    BorderSide borderSide,
+    ShapeBorder shapeBorder,
+    GlobalKey key}) {
+  showDialog(
+      context: context,
+      barrierDismissible: dismiss,
+      builder: (BuildContext context) {
+        return StatefulBuilder(builder: (context, StateSetter setState) {
+          return AlertDialog(
+            title: title,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(radius),
+            ),
+            content: body,
+            actions: [],
+          );
+        });
+      });
+}
