@@ -1,3 +1,4 @@
+import 'package:familyapp/core/api/index.dart';
 import 'package:familyapp/core/api/services/data_service.dart';
 import 'package:familyapp/screens/account/account.dart';
 import 'package:familyapp/screens/dashboard/widget/all_activity.dart';
@@ -13,23 +14,9 @@ class DashBoard extends StatefulWidget {
   DashboardScreen createState() => DashboardScreen();
 }
 
+List events = [];
+
 class DashboardScreen extends State<DashBoard> {
-  List<String> images1 = [
-    "https://st4.depositphotos.com/1643295/24751/i/600/depositphotos_247513910-stock-photo-portrait-serious-mature-indian-businessman.jpg",
-    "https://www.mckinsey.com/~/media/mckinsey/locations/asia/india/careers/our%20people/raman/india_careers_raman-sharma_quote-profile_1536x1152.jpg?mw=1536&car=48:59&cpx=Left&cpy=Top"
-        "https://us.123rf.com/450wm/michaeljung/michaeljung1209/michaeljung120900015/15041949-attractive-female-white-collar-worker-in-office.jpg?ver=6",
-    "https://www.manchester.ac.uk/study/international/country-specific-information/india/India-profile-video-pic-070519-edited.jpg"
-  ];
-  List<String> images2 = [
-    "https://www.mckinsey.com/~/media/mckinsey/locations/asia/india/careers/our%20people/raman/india_careers_raman-sharma_quote-profile_1536x1152.jpg?mw=1536&car=48:59&cpx=Left&cpy=Top",
-    "https://us.123rf.com/450wm/michaeljung/michaeljung1209/michaeljung120900015/15041949-attractive-female-white-collar-worker-in-office.jpg?ver=6",
-    "https://www.manchester.ac.uk/study/international/country-specific-information/india/India-profile-video-pic-070519-edited.jpg"
-  ];
-  List<String> images3 = [
-    "https://images.unsplash.com/photo-1534235187448-833893dfe3e0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80",
-    "https://us.123rf.com/450wm/michaeljung/michaeljung1209/michaeljung120900015/15041949-attractive-female-white-collar-worker-in-office.jpg?ver=6",
-    "https://images.pexels.com/photos/4593618/pexels-photo-4593618.jpeg?cs=srgb&dl=pexels-nila-racigan-4593618.jpg&fm=jpg",
-  ];
   String greeting() {
     var hour = DateTime.now().hour;
     if (hour < 12) {
@@ -41,8 +28,47 @@ class DashboardScreen extends State<DashBoard> {
     return 'Good Evening';
   }
 
+  Future<dynamic> getEventList() async {
+    return postMethod(
+      endpoint: "get_family_events.php",
+      bodyData: {
+        "family_id": DataService.userData['id'],
+      },
+    );
+  }
+
+  Future<dynamic> getFamilyList() async {
+    return postMethod(
+      endpoint: "get_family_children.php",
+      bodyData: {
+        "member_id": DataService.userData['id'],
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    getFamilyList().then((value) {
+      setState(() {
+        DataService.myFamilyList = value['body']['data'];
+      });
+    });
+    getEventList().then((value) {
+      print(" vlaueeeee $value");
+      if (value['body']['status'] == "300") {
+        setState(() {
+          DataService.eventsList = value['body']['data'];
+        });
+      } else {
+        DataService.eventsList = [];
+      }
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    print("vlaueeeee ${DataService.eventsList}");
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarIconBrightness: Brightness.dark,
     ));
@@ -220,7 +246,7 @@ class DashboardScreen extends State<DashBoard> {
                                     ),
                                     manualSpacer(),
                                     Text(
-                                      "2 Member",
+                                      DataService.myFamilyList.length.toString() + " Member",
                                       style: TextStyle(
                                         fontSize: 12,
                                       ),
@@ -270,7 +296,7 @@ class DashboardScreen extends State<DashBoard> {
                                     ),
                                     manualSpacer(),
                                     Text(
-                                      "2 Event(s)",
+                                      DataService.eventsList == null ? "0" + " Event(s)" : DataService.eventsList.length.toString() + " Event(s)",
                                       style: TextStyle(
                                         fontSize: 12,
                                       ),

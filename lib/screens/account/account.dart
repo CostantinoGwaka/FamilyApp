@@ -1,4 +1,6 @@
+import 'package:familyapp/core/api/services/data_service.dart';
 import 'package:familyapp/screens/account/widget/app_info.dart';
+import 'package:familyapp/screens/auth/forget_password.dart';
 import 'package:familyapp/screens/auth/loginscreen.dart';
 import 'package:familyapp/utilities/constant.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +34,7 @@ class _AccountState extends State<Account> {
                   backgroundImage: AssetImage('images/user.png'),
                 ),
                 manualStepper(),
-                Text('Erick Erick'),
+                Text(DataService.userData['fullname']),
                 manualStepper(step: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -58,7 +60,7 @@ class _AccountState extends State<Account> {
                       child: Column(
                         children: [
                           Text('Gender'),
-                          Text('Male'),
+                          Text(DataService.userData['gender']),
                         ],
                       ),
                     ),
@@ -102,34 +104,40 @@ class _AccountState extends State<Account> {
                     ),
                   ),
                 ),
-                // Card(
-                //   shape: shape,
-                //   elevation: 0,
-                //   child: ListTile(
-                //     leading: Container(
-                //       height: 40,
-                //       width: 40,
-                //       decoration: BoxDecoration(
-                //         color: Colors.lightBlue.withOpacity(0.2),
-                //         borderRadius: const BorderRadius.all(
-                //           Radius.circular(10),
-                //         ),
-                //       ),
-                //       child: Icon(
-                //         Icons.settings_outlined,
-                //         color: Theme.of(context).primaryColor,
-                //       ),
-                //     ),
-                //     title: Text('Settings'),
-                //     trailing: IconButton(
-                //       onPressed: () {},
-                //       icon: Icon(
-                //         Icons.arrow_forward_ios,
-                //         size: 20,
-                //       ),
-                //     ),
-                //   ),
-                // ),
+                Card(
+                  shape: shape,
+                  elevation: 0,
+                  child: ListTile(
+                    leading: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.lightBlue.withOpacity(0.2),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                      child: Icon(
+                        Icons.lock,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                    title: Text('Change password'),
+                    trailing: IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ForgetPassword(),
+                            ));
+                      },
+                      icon: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                ),
                 Card(
                   shape: shape,
                   elevation: 0,
@@ -189,7 +197,7 @@ class _AccountState extends State<Account> {
                       ),
                     ),
                     onTap: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder: (context) => Login(),

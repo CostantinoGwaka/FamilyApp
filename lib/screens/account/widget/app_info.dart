@@ -20,8 +20,9 @@ class AppInfo extends StatelessWidget {
               height: 10,
             ),
             const Text(
-              "Erick's Family V 1.0",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              "MSINGAKI's GENERATION FAMILY \n V 1.0",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
             ),
             const SizedBox(
               height: 10,
@@ -31,7 +32,7 @@ class AppInfo extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            const Text("@Erick's Family App 2022")
+            const Text("@MSINGAKI's generation family App 2022")
           ],
         ),
       ),

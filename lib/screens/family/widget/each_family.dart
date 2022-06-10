@@ -7,11 +7,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class EachFamiy extends StatefulWidget {
   final String isSingle;
   final String name;
+  final String phone;
+  final String parentId;
   final String location;
   final String gender;
   final String age;
   final String job;
-  EachFamiy({Key key, this.gender, this.location, this.age, this.job, this.isSingle, this.name}) : super(key: key);
+  EachFamiy({Key key, this.parentId, this.phone, this.gender, this.location, this.age, this.job, this.isSingle, this.name}) : super(key: key);
 
   @override
   State<EachFamiy> createState() => _EachFamiyState();
@@ -95,7 +97,7 @@ class _EachFamiyState extends State<EachFamiy> {
                                           ),
                                     ),
                                     TextSpan(
-                                      text: widget.name + '\'s ' + "Family",
+                                      text: "widget.name" + '\'s ' + "Family",
                                       style: Theme.of(context).textTheme.headline6.copyWith(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w600,
@@ -141,8 +143,7 @@ class _EachFamiyState extends State<EachFamiy> {
                       padding: EdgeInsets.symmetric(
                         vertical: 24.0,
                       ),
-                      child: 
-                      Column(
+                      child: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

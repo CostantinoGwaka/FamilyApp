@@ -3,10 +3,9 @@ import 'dart:convert';
 
 import 'package:familyapp/core/api/services/data_service.dart';
 import 'package:familyapp/screens/auth/pre_auth.dart';
+import 'package:familyapp/screens/bottom_nav/bottom_nav.dart';
 import 'package:familyapp/screens/widget/ui_helpers.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:familyapp/screens/auth/loginscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -58,6 +57,7 @@ class _MyAppState extends State<MyApp> {
                 visualDensity: VisualDensity.adaptivePlatformDensity,
                 // textTheme: GoogleFonts.poppinsTextTheme(),
               ),
+              // home: DataService.userData.isEmpty ? PreAuth() : BottomNavigation(),
               home: PreAuth(),
             );
           }

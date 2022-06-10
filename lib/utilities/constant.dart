@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+String userKey = "";
+
 double deviceHeight(BuildContext context) {
   return MediaQuery.of(context).size.height;
 }

@@ -1,3 +1,4 @@
+import 'package:familyapp/core/api/services/data_service.dart';
 import 'package:familyapp/screens/account/widget/app_info.dart';
 import 'package:familyapp/screens/family/widget/familiy_desc.dart';
 import 'package:familyapp/screens/family/widget/family_setting.dart';
@@ -23,6 +24,11 @@ class _MyFamiliyState extends State<MyFamiliy> {
     final difference = date2.difference(dates).inDays / 365;
 
     return difference.floor();
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -66,7 +72,7 @@ class _MyFamiliyState extends State<MyFamiliy> {
               centerTitle: true,
               collapseMode: CollapseMode.parallax,
               title: Text(
-                "Rumishaeli Msinga Moshi's",
+                DataService.userData['fullname'] + "'s",
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontWeight: FontWeight.w500,
@@ -93,7 +99,7 @@ class _MyFamiliyState extends State<MyFamiliy> {
                     SizedBox(
                       height: deviceHeight(context) / 25,
                     ),
-                    'false' == 'false'
+                    DataService.myFamilyList.isNotEmpty
                         ? Column(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,7 +143,7 @@ class _MyFamiliyState extends State<MyFamiliy> {
                                                 backgroundImage: AssetImage('images/user.png'),
                                               ),
                                               manualStepper(),
-                                              Text('Father (Alive)')
+                                              Text('Father')
                                             ],
                                           ),
                                         ),
@@ -160,7 +166,7 @@ class _MyFamiliyState extends State<MyFamiliy> {
                                                 backgroundImage: AssetImage('images/user.png'),
                                               ),
                                               manualStepper(),
-                                              Text('Mother' + "(Desease)")
+                                              Text('Mother')
                                             ],
                                           ),
                                         ),
@@ -172,187 +178,185 @@ class _MyFamiliyState extends State<MyFamiliy> {
                                   ],
                                 ),
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 24.0,
-                                      vertical: deviceHeight(context) / 25,
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Children's Information",
-                                          style: TextStyle(
-                                            color: Color.fromRGBO(19, 22, 33, 1),
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 24.0,
+                                    vertical: deviceHeight(context) / 25,
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Children's Information",
+                                        style: TextStyle(
+                                          color: Color.fromRGBO(19, 22, 33, 1),
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold,
                                         ),
-                                        manualStepper(),
-                                        Card(
-                                          shape: shape,
-                                          child: SizedBox(
-                                            width: double.infinity,
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: Column(
-                                                children: [
-                                                  Row(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    children: [
-                                                      Text(
-                                                        'Total:',
-                                                        style: TextStyle(fontSize: 18),
+                                      ),
+                                      manualStepper(),
+                                      Card(
+                                        shape: shape,
+                                        child: SizedBox(
+                                          width: double.infinity,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      'Total:',
+                                                      style: TextStyle(fontSize: 18),
+                                                    ),
+                                                    manualSpacer(),
+                                                    Text(
+                                                      DataService.myFamilyList.length.toString() + ' Children',
+                                                      style: TextStyle(fontSize: 18),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    Column(
+                                                      children: [
+                                                        Text('Male'),
+                                                        Text('5'),
+                                                      ],
+                                                    ),
+                                                    manualSpacer(step: 10),
+                                                    Container(
+                                                      height: 22,
+                                                      width: 2,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.black,
                                                       ),
-                                                      manualSpacer(),
-                                                      Text(
-                                                        '9 Children',
-                                                        style: TextStyle(fontSize: 18),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    children: [
-                                                      Column(
-                                                        children: [
-                                                          Text('Male'),
-                                                          Text('5'),
-                                                        ],
-                                                      ),
-                                                      manualSpacer(step: 10),
-                                                      Container(
-                                                        height: 22,
-                                                        width: 2,
-                                                        decoration: BoxDecoration(
-                                                          color: Colors.black,
-                                                        ),
-                                                      ),
-                                                      manualSpacer(step: 10),
-                                                      Column(
-                                                        children: [
-                                                          Text('Female'),
-                                                          Text('4'),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Align(
-                                                    alignment: Alignment.bottomRight,
-                                                    child: GestureDetector(
-                                                      child: Text('View more'),
-                                                      onTap: () {
-                                                        Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) => FamilyDescription(
-                                                              title: "Children's Information",
-                                                            ),
+                                                    ),
+                                                    manualSpacer(step: 10),
+                                                    Column(
+                                                      children: [
+                                                        Text('Female'),
+                                                        Text('4'),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                Align(
+                                                  alignment: Alignment.bottomRight,
+                                                  child: GestureDetector(
+                                                    child: Text('View more'),
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) => FamilyDescription(
+                                                            title: "Children's Information",
                                                           ),
-                                                        );
-                                                      },
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 24.0,
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Gland children's Informations",
-                                          style: TextStyle(
-                                            color: Color.fromRGBO(19, 22, 33, 1),
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        Card(
-                                          shape: shape,
-                                          child: SizedBox(
-                                            width: double.infinity,
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.center,
-                                                children: [
-                                                  Row(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    children: [
-                                                      Text(
-                                                        'Total:',
-                                                        style: TextStyle(fontSize: 18),
-                                                      ),
-                                                      manualSpacer(),
-                                                      Text(
-                                                        '9',
-                                                        style: TextStyle(fontSize: 18),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    children: [
-                                                      Column(
-                                                        children: [
-                                                          Text('Male'),
-                                                          Text('5'),
-                                                        ],
-                                                      ),
-                                                      manualSpacer(step: 10),
-                                                      Container(
-                                                        height: 22,
-                                                        width: 2,
-                                                        decoration: BoxDecoration(
-                                                          color: Colors.black,
                                                         ),
-                                                      ),
-                                                      manualSpacer(step: 10),
-                                                      Column(
-                                                        children: [
-                                                          Text('Female'),
-                                                          Text('4'),
-                                                        ],
-                                                      ),
-                                                    ],
+                                                      );
+                                                    },
                                                   ),
-                                                  Align(
-                                                    alignment: Alignment.bottomRight,
-                                                    child: GestureDetector(
-                                                      child: Text('View more'),
-                                                      onTap: () {
-                                                        // Navigator.push(
-                                                        //   context,
-                                                        //   MaterialPageRoute(
-                                                        //       builder: (context) => FamilyDescription(
-                                                        //             title: "Gland children Information",
-                                                        //           )),
-                                                        // );
-                                                      },
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
+                                ),
+                                //   Padding(
+                                //     padding: EdgeInsets.symmetric(
+                                //       horizontal: 24.0,
+                                //     ),
+                                //     child: Column(
+                                //       crossAxisAlignment: CrossAxisAlignment.start,
+                                //       children: [
+                                //         Text(
+                                //           "Gland children's Informations",
+                                //           style: TextStyle(
+                                //             color: Color.fromRGBO(19, 22, 33, 1),
+                                //             fontSize: 18.0,
+                                //             fontWeight: FontWeight.bold,
+                                //           ),
+                                //         ),
+                                //         Card(
+                                //           shape: shape,
+                                //           child: SizedBox(
+                                //             width: double.infinity,
+                                //             child: Padding(
+                                //               padding: const EdgeInsets.all(8.0),
+                                //               child: Column(
+                                //                 crossAxisAlignment: CrossAxisAlignment.center,
+                                //                 children: [
+                                //                   Row(
+                                //                     mainAxisAlignment: MainAxisAlignment.center,
+                                //                     children: [
+                                //                       Text(
+                                //                         'Total:',
+                                //                         style: TextStyle(fontSize: 18),
+                                //                       ),
+                                //                       manualSpacer(),
+                                //                       Text(
+                                //                         '9',
+                                //                         style: TextStyle(fontSize: 18),
+                                //                       ),
+                                //                     ],
+                                //                   ),
+                                //                   Row(
+                                //                     mainAxisAlignment: MainAxisAlignment.center,
+                                //                     children: [
+                                //                       Column(
+                                //                         children: [
+                                //                           Text('Male'),
+                                //                           Text('5'),
+                                //                         ],
+                                //                       ),
+                                //                       manualSpacer(step: 10),
+                                //                       Container(
+                                //                         height: 22,
+                                //                         width: 2,
+                                //                         decoration: BoxDecoration(
+                                //                           color: Colors.black,
+                                //                         ),
+                                //                       ),
+                                //                       manualSpacer(step: 10),
+                                //                       Column(
+                                //                         children: [
+                                //                           Text('Female'),
+                                //                           Text('4'),
+                                //                         ],
+                                //                       ),
+                                //                     ],
+                                //                   ),
+                                //                   Align(
+                                //                     alignment: Alignment.bottomRight,
+                                //                     child: GestureDetector(
+                                //                       child: Text('View more'),
+                                //                       onTap: () {
+                                //                         // Navigator.push(
+                                //                         //   context,
+                                //                         //   MaterialPageRoute(
+                                //                         //       builder: (context) => FamilyDescription(
+                                //                         //             title: "Gland children Information",
+                                //                         //           )),
+                                //                         // );
+                                //                       },
+                                //                     ),
+                                //                   ),
+                                //                 ],
+                                //               ),
+                                //             ),
+                                //           ),
+                                //         ),
+                                //       ],
+                                //     ),
+                                //   ),
+                                // ],
+                              ]),
                             ],
                           )
                         : Column(
@@ -380,7 +384,7 @@ class _MyFamiliyState extends State<MyFamiliy> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: Column(children: [
                                       ListTile(
-                                        leading: "Ke" == 'Ke' ? Icon(Icons.female) : Icon(Icons.male),
+                                        leading: "Male" == DataService.userData['gender'] ? Icon(Icons.female) : Icon(Icons.male),
                                         title: Text("ke"),
                                       ),
                                       ListTile(
@@ -452,25 +456,26 @@ class _MyFamiliyState extends State<MyFamiliy> {
                                     title: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        Text('0712826083'),
-                                        manualSpacer(),
-                                        Container(
-                                          height: 10,
-                                          width: 2,
-                                          decoration: BoxDecoration(
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                        manualSpacer(),
-                                        Text('0712826083'),
+                                        Text(DataService.userData['phone']),
+                                        // manualSpacer(),
+                                        // Container(
+                                        //   height: 10,
+                                        //   width: 2,
+                                        //   decoration: BoxDecoration(
+                                        //     color: Colors.black,
+                                        //   ),
+                                        // ),
+                                        // manualSpacer(),
+                                        // Text('0712826083'),
                                       ],
                                     ),
                                   ),
                                   ListTile(
                                     leading: Icon(Icons.location_on),
                                     title: Text('Dar Es Salaam'),
-                                    subtitle: Text('Bonyokwa - 119'),
+                                    subtitle: Text(DataService.userData['location']),
                                   ),
+                                  manualStepper(step: 70)
                                 ],
                               ))
                         ],

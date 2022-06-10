@@ -52,7 +52,7 @@ void universalLoading(
         alignment: alignment ?? Alignment.center,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
         child: SizedBox(
           height: UIHelper.deviceHeigth(context) / 10,
@@ -68,10 +68,10 @@ void universalLoading(
                 UIHelper.horizontalSpace(width: 12),
                 Text(
                   content,
-                  style: Theme.of(context).textTheme.headline1.copyWith(
-                        fontSize: 14,
-                        color: Colors.black,
-                      ),
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                  ),
                 ),
               ],
             ),

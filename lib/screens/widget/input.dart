@@ -92,7 +92,7 @@ class UniversalInput extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(
         top: 2.0,
-        bottom: 2,
+        bottom: 0,
         left: 10,
         right: 10,
       ),
@@ -117,7 +117,7 @@ class UniversalInput extends StatelessWidget {
           helperText: helperText,
           floatingLabelBehavior: FloatingLabelBehavior.always,
           hintStyle: TextStyle(color: hintColor, fontFamily: fontFamily, fontSize: hintSize),
-          contentPadding: padding,
+          contentPadding: EdgeInsets.fromLTRB(8, 8, 5, 0),
           hintText: hint,
           filled: filled,
           helperStyle: TextStyle(color: helperColor, fontSize: helperSize),
