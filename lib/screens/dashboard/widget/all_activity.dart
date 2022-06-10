@@ -4,6 +4,7 @@ import 'package:familyapp/screens/widget/global_widget.dart';
 import 'package:familyapp/screens/widget/ui_helpers.dart';
 import 'package:familyapp/utilities/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AllActivities extends StatefulWidget {
   const AllActivities({Key key}) : super(key: key);
@@ -46,7 +47,6 @@ class _AllActivitiesState extends State<AllActivities> {
         body: FutureBuilder(
             future: recent,
             builder: (context, AsyncSnapshot snapshot) {
-              print(' here  data ${snapshot.data}');
               switch (snapshot.connectionState) {
                 case ConnectionState.done:
                   if (snapshot.data != "Hakuna_mtandao") {
@@ -68,7 +68,10 @@ class _AllActivitiesState extends State<AllActivities> {
                       itemCount: snapshot.data['body']['data'].length,
                       itemBuilder: (context, index) {
                         var data = snapshot.data['body']['data'][index];
-                        print("hahahhah $data");
+                        //  DateFormat('EEEE, d MMM, yyyy').format(selectedDate)
+                        String time = DateFormat('d, MMM, yyyy').format(DateTime.tryParse(data['date_event']));
+                        String saa = data['time'];
+                        print(saa);
                         return Card(
                           elevation: 0,
                           shape: shape,
@@ -101,7 +104,7 @@ class _AllActivitiesState extends State<AllActivities> {
                                                     child: Row(
                                                       children: [
                                                         Text(
-                                                          data['date_event'],
+                                                          time,
                                                         ),
                                                         manualSpacer(),
                                                         // const Icon(
@@ -123,7 +126,7 @@ class _AllActivitiesState extends State<AllActivities> {
                                                     child: Row(
                                                       children: [
                                                         Text(
-                                                          data['time'],
+                                                          saa,
                                                         ),
                                                         manualSpacer(),
                                                         // const Icon(
@@ -177,7 +180,7 @@ class _AllActivitiesState extends State<AllActivities> {
                             ),
                             title: Text(data['title']),
                             subtitle: Text(data['descp']),
-                            trailing: Text(data['date_event']),
+                            trailing: Text(time),
                             // trailing: GestureDetector(
                             //   onTap: () {
                             //     Navigator.push(

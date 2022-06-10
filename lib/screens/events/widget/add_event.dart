@@ -1,5 +1,6 @@
 import 'package:familyapp/core/api/index.dart';
 import 'package:familyapp/core/api/services/data_service.dart';
+import 'package:familyapp/screens/dashboard/dashboard.dart';
 import 'package:familyapp/screens/widget/buttons.dart';
 import 'package:familyapp/screens/widget/global_widget.dart';
 import 'package:familyapp/screens/widget/input.dart';
@@ -250,6 +251,7 @@ class _AddEventState extends State<AddEvent> {
                         if (value['code'] == 200) {
                           print("here my result $value");
                           Navigator.pop(context);
+
                           respondMessage(
                             context,
                             isSuccess: true,

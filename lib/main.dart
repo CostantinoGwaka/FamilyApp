@@ -57,7 +57,8 @@ class _MyAppState extends State<MyApp> {
                 visualDensity: VisualDensity.adaptivePlatformDensity,
                 // textTheme: GoogleFonts.poppinsTextTheme(),
               ),
-              home: DataService.userData.isEmpty ? PreAuth() : BottomNavigation(),
+              // home: DataService.userData.isEmpty ? PreAuth() : BottomNavigation(),
+              home: PreAuth(),
             );
           }
         });

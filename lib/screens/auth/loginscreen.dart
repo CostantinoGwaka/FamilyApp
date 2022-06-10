@@ -264,79 +264,83 @@ class _LoginState extends State<Login> {
 
   Widget _submitButton() {
     return UniversalButton(
-        buttonHeight: 53,
-        radius: 20,
-        buttonColor: Theme.of(context).primaryColor,
-        child: Text(
-          'Login',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-        buttonWidth: deviceWidth(context) / 1.2,
-        action: () async {
-          if (_formKey.currentState.validate()) {
-            universalLoading(context, content: 'Please wait...');
-            var _loginCredential = {
-              "username": emailController.text,
-              "password": passController.text,
-            };
+      buttonHeight: 53,
+      radius: 20,
+      buttonColor: Theme.of(context).primaryColor,
+      child: Text(
+        'Login',
+        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      ),
+      buttonWidth: deviceWidth(context) / 1.2,
+      action: () async {
+        if (_formKey.currentState.validate()) {
+          universalLoading(context, content: 'Please wait...');
+          var _loginCredential = {
+            "username": emailController.text,
+            "password": passController.text,
+          };
 
-            postLoginMethod(
-              endpoint: "login.php",
-              bodyData: _loginCredential,
-            ).then((value) async {
-              print(" here we are $value");
-              if (value == "Connection closed before full header was received") {
+          postLoginMethod(
+            endpoint: "login.php",
+            bodyData: _loginCredential,
+          ).then((value) async {
+            print(" here we are $value");
+            if (value == "Connection closed before full header was received") {
+              Navigator.pop(context);
+              respondMessage(
+                context,
+                isSuccess: false,
+                color: Theme.of(context).primaryColor,
+                title: "Something wrong",
+                subTitle: "please try angain to login",
+              );
+            } else {
+              if (value['code'] == "200") {
+                var user = value['body']['data'][0];
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                Map<String, dynamic> userdata = {
+                  // 'fullname': "Cosmas Paulo",
+                  // 'phonenumber': "0712826083",
+                  // 'email': 'cosmasp59@gmail.com',
+                  // 'level': "1",
+                  // 'status': "active",
+                  'fullname': user['fname'],
+                  'gender': user['gender'],
+                  'phone': user['phone'],
+                  'location': user['location'],
+                  'parent_id': user['parent_id'],
+                  'status': user['status'],
+                  'mahusiano': user['mahusiano'],
+                  'dob': user['dob'],
+                  'id': user['id'],
+                };
+                String encodedMap = json.encode(userdata);
+                prefs.setString('userdata', encodedMap);
+                String datas = prefs.getString('userdata');
+                Map<String, dynamic> decodedMap = json.decode(datas);
+                setState(() {
+                  DataService.userData = decodedMap;
+                  userKey = user['password'];
+                });
                 Navigator.pop(context);
                 respondMessage(
                   context,
-                  isSuccess: false,
+                  isSuccess: true,
                   color: Theme.of(context).primaryColor,
-                  title: "Something wrong",
-                  subTitle: "please try angain to login",
+                  title: "Msingaki's Generation",
+                  subTitle: "Welcome back, and enjoy it... ",
                 );
-              } else {
-                if (value['code'] == "200") {
-                  var user = value['body']['data'][0];
-                  SharedPreferences prefs = await SharedPreferences.getInstance();
-                  Map<String, dynamic> userdata = {
-                    // 'fullname': "Cosmas Paulo",
-                    // 'phonenumber': "0712826083",
-                    // 'email': 'cosmasp59@gmail.com',
-                    // 'level': "1",
-                    // 'status': "active",
-                    'fullname': user['fname'],
-                    'gender': user['gender'],
-                    'phone': user['phone'],
-                    'location': user['location'],
-                    'parent_id': user['parent_id'],
-                    'status': user['status'],
-                    'id': user['id'],
-                  };
-                  String encodedMap = json.encode(userdata);
-                  prefs.setString('userdata', encodedMap);
-                  String datas = prefs.getString('userdata');
-                  Map<String, dynamic> decodedMap = json.decode(datas);
-                  setState(() {
-                    DataService.userData = decodedMap;
-                  });
-                  Navigator.pop(context);
-                  respondMessage(
-                    context,
-                    isSuccess: true,
-                    color: Theme.of(context).primaryColor,
-                    title: "Msingiti's Generation",
-                    subTitle: "Welcome back, and enjoy it... ",
-                  );
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BottomNavigation(),
-                    ),
-                  );
-                }
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BottomNavigation(),
+                  ),
+                );
               }
-            });
-          }
-        });
+            }
+          });
+        }
+      },
+    );
   }
 }

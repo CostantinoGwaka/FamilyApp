@@ -8,6 +8,7 @@ import 'package:familyapp/screens/widget/ui_helpers.dart';
 import 'package:familyapp/utilities/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class EventScreen extends StatefulWidget {
   const EventScreen({Key key}) : super(key: key);
@@ -20,16 +21,16 @@ Future events;
 
 class _EventScreenState extends State<EventScreen> {
   Future<dynamic> getEventList() async {
-    if (events == null) {
-      return postMethod(
-        endpoint: "get_family_events.php",
-        bodyData: {
-          "family_id": DataService.userData['id'],
-        },
-      );
-    } else {
-      return events;
-    }
+    // if (events == null) {
+    return postMethod(
+      endpoint: "get_family_events.php",
+      bodyData: {
+        "family_id": DataService.userData['id'],
+      },
+    );
+    // } else {
+    //   return events;
+    // }
   }
 
   @override
@@ -106,6 +107,8 @@ class _EventScreenState extends State<EventScreen> {
                       itemCount: snapshot.data['body']['data'].length,
                       itemBuilder: (context, index) {
                         var data = snapshot.data['body']['data'][index];
+                        String time = DateFormat('d, MMM, yyyy').format(DateTime.tryParse(data['date_event']));
+
                         print('hfhhfhhfhf $data');
                         return Card(
                           elevation: 0,
@@ -139,7 +142,7 @@ class _EventScreenState extends State<EventScreen> {
                                                     child: Row(
                                                       children: [
                                                         Text(
-                                                          data['date_event'],
+                                                          time,
                                                         ),
                                                         manualSpacer(),
                                                         // const Icon(
@@ -217,7 +220,7 @@ class _EventScreenState extends State<EventScreen> {
                             subtitle: Text(data['descp']),
                             // trailing: Text(DateFormat('EEEE, d MMM, yyyy').format(data['date_event'])),
 
-                            trailing: Text(data['date_event']),
+                            trailing: Text(time),
                             // trailing: GestureDetector(
                             //   onTap: () {
                             //     Navigator.push(

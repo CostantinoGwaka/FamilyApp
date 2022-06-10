@@ -1,3 +1,4 @@
+import 'package:familyapp/core/api/services/data_service.dart';
 import 'package:familyapp/screens/family/widget/each_family.dart';
 import 'package:familyapp/utilities/constant.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,16 @@ class FamilyDescription extends StatefulWidget {
 }
 
 class _FamilyDescriptionState extends State<FamilyDescription> {
+  int agedate({String date}) {
+    String datesss = date;
+    DateTime dates = DateTime.parse(datesss);
+
+    final date2 = DateTime.now();
+    final difference = date2.difference(dates).inDays / 365;
+
+    return difference.floor();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,8 +29,10 @@ class _FamilyDescriptionState extends State<FamilyDescription> {
       body: SafeArea(
           child: ListView.builder(
         physics: BouncingScrollPhysics(),
-        itemCount: 10,
+        itemCount: DataService.myFamilyList.length,
         itemBuilder: (context, index) {
+          var data = DataService.myFamilyList[index];
+          print("hfhfhfhfh $data");
           return Card(
             child: Column(children: [
               manualStepper(),
@@ -28,10 +41,10 @@ class _FamilyDescriptionState extends State<FamilyDescription> {
                   maxRadius: 35,
                   backgroundImage: AssetImage('images/user.png'),
                 ),
-                title: Text('John Constanino'),
+                title: Text(data['fname']),
                 subtitle: Row(
                   children: [
-                    Text('Male'),
+                    Text(data['gender']),
                     manualSpacer(),
                     Container(
                       height: 10,
@@ -47,19 +60,20 @@ class _FamilyDescriptionState extends State<FamilyDescription> {
                 trailing: GestureDetector(
                   child: Text('View more'),
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EachFamiy(
-                          isSingle: 'true',
-                          name: 'John Constantino',
-                          location: 'Mbezi Beach - 1298',
-                          gender: 'Me',
-                          age: '1990-07-19',
-                          job: 'Accountant',
-                        ),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => EachFamiy(
+                    //       isSingle: 'true',
+                    //       name: data['fname'],
+                    //       location: data['location'],
+                    //       gender: data['gender'],
+                    //       age: '1990-07-19',
+                    //       phone: data['phone'],
+                    //       parentId: data['parent_id'],
+                    //     ),
+                    //   ),
+                    // );
                   },
                 ),
               ),

@@ -10,6 +10,7 @@ import 'package:familyapp/screens/widget/input.dart';
 import 'package:familyapp/utilities/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class Registration extends StatefulWidget {
   Registration({Key key}) : super(key: key);
@@ -19,18 +20,18 @@ class Registration extends StatefulWidget {
   State<Registration> createState() => _RegistrationState();
 }
 
-class Subject {
+class User {
   String name;
   String id;
   String location;
-  Subject({
+  User({
     this.name,
     this.id,
     this.location,
   });
 
-  factory Subject.fromJson(Map<dynamic, dynamic> json) {
-    return Subject(
+  factory User.fromJson(Map<dynamic, dynamic> json) {
+    return User(
       name: json['fname'],
       location: json['location'],
       id: json['id'],
@@ -63,8 +64,8 @@ class _RegistrationState extends State<Registration> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _debouncer = Debouncer();
 
-  List<Subject> ulist = [];
-  List<Subject> userLists = [];
+  List<User> ulist = [];
+  List<User> userLists = [];
   int _pos = 0;
   bool _isObscure = true;
   String url = 'https://familyapp90.000webhostapp.com/admin/api/get_family.php';
@@ -73,13 +74,16 @@ class _RegistrationState extends State<Registration> {
   String dropdownValue = '';
 
   int parentId = 0;
-  Future<List<Subject>> getAllulistList() async {
+  Future<List<User>> getAllulistList() async {
     userLists.clear();
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
+        var responseDecoded = jsonDecode(response.body);
+        // print("=======> ${responseDecoded['data']}");
         print(response.body);
-        List<Subject> list = parseAgents(response.body);
+
+        List<User> list = parseAgents(jsonEncode(responseDecoded['data']));
         print("=======> $list");
         return list;
       } else {
@@ -90,18 +94,28 @@ class _RegistrationState extends State<Registration> {
     }
   }
 
-  static List<Subject> parseAgents(String responseBody) {
+  static List<User> parseAgents(String responseBody) {
     print("here is response $responseBody");
     final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
-    return parsed.map<Subject>((json) => Subject.fromJson(json)).toList();
+    return parsed.map<User>((json) => User.fromJson(json)).toList();
+  }
+
+  DateTime selectedDate = DateTime.now();
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(context: context, initialDate: selectedDate, firstDate: DateTime(1960, 8), lastDate: DateTime(2101));
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
   }
 
   @override
   void initState() {
     super.initState();
-    getAllulistList().then((subjectFromServer) {
+    getAllulistList().then((UserFromServer) {
       setState(() {
-        ulist = subjectFromServer;
+        ulist = UserFromServer;
         userLists = ulist;
       });
     });
@@ -339,6 +353,49 @@ class _RegistrationState extends State<Registration> {
                               }).toList(),
                             ),
                           ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () => _selectDate(context),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      const Text('Date of birth'),
+                                      Container(
+                                        height: 50,
+                                        width: deviceWidth(context) / 1.3,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: Theme.of(context).primaryColor, // red as border color
+                                          ),
+                                          borderRadius: BorderRadius.circular(20),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(12.0),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                DateFormat('EEEE, d MMM, yyyy').format(selectedDate),
+                                              ),
+                                              manualSpacer(),
+                                              const Icon(
+                                                Icons.date_range,
+                                                size: 20,
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                manualSpacer(step: 15),
+                              ],
+                            ),
+                          ),
                           manualStepper(step: 10),
                           UniversalInput(
                             keyboardType: TextInputType.phone,
@@ -436,13 +493,16 @@ class _RegistrationState extends State<Registration> {
                             "location": _locationController.text,
                             "parent_id": parentId.toString(),
                             "code": _codeController.text,
-                            "password": _passController.text
+                            "password": _passController.text,
+                            "mahusiano": '',
+                            'dob': selectedDate.toString()
                           };
 
                           postMethod(
                             endpoint: '/jisajili.php',
                             bodyData: _data,
                           ).then((value) {
+                            print('jfjfjjfjf $value');
                             if (value['code'] == 200) {
                               Navigator.pop(context);
                               respondMessage(

@@ -55,16 +55,20 @@ class DashboardScreen extends State<DashBoard> {
     });
     getEventList().then((value) {
       print(" vlaueeeee $value");
-      setState(() {
-        DataService.eventsList = value['body']['data'];
-      });
+      if (value['body']['status'] == "300") {
+        setState(() {
+          DataService.eventsList = value['body']['data'];
+        });
+      } else {
+        DataService.eventsList = [];
+      }
     });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    print("here events ${DataService.myFamilyList}");
+    print("vlaueeeee ${DataService.eventsList}");
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarIconBrightness: Brightness.dark,
     ));
@@ -292,7 +296,7 @@ class DashboardScreen extends State<DashBoard> {
                                     ),
                                     manualSpacer(),
                                     Text(
-                                      DataService.eventsList.length.toString() + " Event(s)",
+                                      DataService.eventsList == null ? "0" + " Event(s)" : DataService.eventsList.length.toString() + " Event(s)",
                                       style: TextStyle(
                                         fontSize: 12,
                                       ),
@@ -337,7 +341,7 @@ class DashboardScreen extends State<DashBoard> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => RecentEvents(),
+                            builder: (context) => AllActivities(),
                           ),
                         );
                       },

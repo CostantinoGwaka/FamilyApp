@@ -12,6 +12,7 @@ class FamiliySettings extends StatefulWidget {
 
 class _FamiliySettingsState extends State<FamiliySettings> {
   String dropdownValue = '';
+  String relation = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +25,60 @@ class _FamiliySettingsState extends State<FamiliySettings> {
           child: Column(
             children: [
               manualStepper(step: 10),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: DropdownButtonFormField<String>(
+                  validator: (String value) {
+                    if (value.isEmpty) {
+                      return 'Please select relationship';
+                    }
+                    return null;
+                  },
+                  hint: Text('eg. Husband'),
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.family_restroom),
+                    label: Text('Relationship'),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                      borderSide: BorderSide(
+                        color: Theme.of(context).primaryColor,
+                        width: 1.0,
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                      borderSide: BorderSide(
+                        color: Theme.of(context).primaryColor,
+                        width: 1.0,
+                      ),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                      borderSide: BorderSide(
+                        color: Theme.of(context).primaryColor,
+                        width: 1.0,
+                      ),
+                    ),
+                    contentPadding: EdgeInsets.all(8),
+                  ),
+                  // value: dropdownValue,
+                  onChanged: (String newValue) {
+                    setState(() {
+                      relation = newValue;
+                    });
+                  },
+                  items: <String>[
+                    'Husband/Wife',
+                    'Children',
+                  ].map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+              ),
+              manualStepper(step: 20),
               UniversalInput(
                 prefixIcon: Icons.person,
                 label: "Fullname",
@@ -39,7 +94,7 @@ class _FamiliySettingsState extends State<FamiliySettings> {
               manualStepper(step: 10),
               UniversalInput(
                 helperText: 'Optional',
-                prefixIcon: Icons.person,
+                prefixIcon: Icons.phone,
                 label: "Phonenumber",
                 hint: "eg. 0746789878",
                 border: OutlineInputBorder(
@@ -53,7 +108,7 @@ class _FamiliySettingsState extends State<FamiliySettings> {
               manualStepper(step: 10),
               UniversalInput(
                 helperText: 'Optional - leave empty if live in you location',
-                prefixIcon: Icons.person,
+                prefixIcon: Icons.location_on,
                 label: "Location",
                 hint: "eg. Kawe - 119",
                 border: OutlineInputBorder(
@@ -111,11 +166,8 @@ class _FamiliySettingsState extends State<FamiliySettings> {
                     'Male',
                     'Female',
                   ].map<DropdownMenuItem<String>>((String value) {
-
                     return DropdownMenuItem<String>(
-
                       value: value,
-                      
                       child: Text(value),
                     );
                   }).toList(),
