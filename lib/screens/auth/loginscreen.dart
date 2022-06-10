@@ -74,11 +74,11 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     _loadUserEmailPassword();
-    _timer = Timer.periodic(Duration(seconds: 7), (Timer t) {
-      setState(() {
-        _pos = (_pos + 1) % widget.photos.length;
-      });
-    });
+    // _timer = Timer.periodic(Duration(seconds: 7), (Timer t) {
+    //   setState(() {
+    //     _pos = (_pos + 1) % widget.photos.length;
+    //   });
+    // });
     super.initState();
   }
 
@@ -107,10 +107,7 @@ class _LoginState extends State<Login> {
                       alignment: Alignment.topCenter,
                       widthFactor: 0.45,
                       child: Container(
-                        child: Stack(children: [
-                          AnimatedOpacity(opacity: _pos == 1 ? 1 : 0, duration: Duration(milliseconds: 1000), child: Image.asset(widget.photos[1])),
-                          AnimatedOpacity(opacity: _pos == 0 ? 1 : 0, duration: Duration(milliseconds: 1000), child: Image.asset(widget.photos[0]))
-                        ]),
+                        child: Image.asset(widget.photos[1]),
                       ),
                     ),
                   ),
@@ -172,7 +169,7 @@ class _LoginState extends State<Login> {
                                   //       ),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
-                                    borderSide:  BorderSide(
+                                    borderSide: BorderSide(
                                       color: Theme.of(context).primaryColor,
                                       width: 1.0,
                                     ),
@@ -188,7 +185,7 @@ class _LoginState extends State<Login> {
                                   controller: passController,
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
-                                    borderSide:  BorderSide(
+                                    borderSide: BorderSide(
                                       color: Theme.of(context).primaryColor,
                                       width: 1.0,
                                     ),
@@ -283,48 +280,61 @@ class _LoginState extends State<Login> {
               "password": passController.text,
             };
 
-            postMethod(
+            postLoginMethod(
               endpoint: "login.php",
               bodyData: _loginCredential,
             ).then((value) async {
-              print(value);
-              // if (value['code'] == 200) {
-              // var user = value['body'][0];
-              SharedPreferences prefs = await SharedPreferences.getInstance();
-              Map<String, dynamic> userdata = {
-                'fullname': "Cosmas Paulo",
-                'phonenumber': "0712826083",
-                'email': 'cosmasp59@gmail.com',
-                'level': "1",
-                'status': "active",
-                // 'fullname': user['full_name'],
-                // 'phonenumber': user['phonenumber'],
-                // 'email': user['email'],
-                // 'level': user['level'],
-                // 'status': user['status'],
-              };
-              String encodedMap = json.encode(userdata);
-              prefs.setString('userdata', encodedMap);
-              String datas = prefs.getString('userdata');
-              Map<String, dynamic> decodedMap = json.decode(datas);
-              setState(() {
-                DataService.userData = decodedMap;
-              });
-              Navigator.pop(context);
-              respondMessage(
-                context,
-                isSuccess: true,
-                color: Theme.of(context).primaryColor,
-                title: "Erick's Family",
-                subTitle: "Welcome back, and enjoy it... ",
-              );
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => BottomNavigation(),
-                ),
-              );
-              // }
+              print(" here we are $value");
+              if (value == "Connection closed before full header was received") {
+                Navigator.pop(context);
+                respondMessage(
+                  context,
+                  isSuccess: false,
+                  color: Theme.of(context).primaryColor,
+                  title: "Something wrong",
+                  subTitle: "please try angain to login",
+                );
+              } else {
+                if (value['code'] == "200") {
+                  var user = value['body']['data'][0];
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  Map<String, dynamic> userdata = {
+                    // 'fullname': "Cosmas Paulo",
+                    // 'phonenumber': "0712826083",
+                    // 'email': 'cosmasp59@gmail.com',
+                    // 'level': "1",
+                    // 'status': "active",
+                    'fullname': user['fname'],
+                    'gender': user['gender'],
+                    'phone': user['phone'],
+                    'location': user['location'],
+                    'parent_id': user['parent_id'],
+                    'status': user['status'],
+                    'id': user['id'],
+                  };
+                  String encodedMap = json.encode(userdata);
+                  prefs.setString('userdata', encodedMap);
+                  String datas = prefs.getString('userdata');
+                  Map<String, dynamic> decodedMap = json.decode(datas);
+                  setState(() {
+                    DataService.userData = decodedMap;
+                  });
+                  Navigator.pop(context);
+                  respondMessage(
+                    context,
+                    isSuccess: true,
+                    color: Theme.of(context).primaryColor,
+                    title: "Msingiti's Generation",
+                    subTitle: "Welcome back, and enjoy it... ",
+                  );
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BottomNavigation(),
+                    ),
+                  );
+                }
+              }
             });
           }
         });

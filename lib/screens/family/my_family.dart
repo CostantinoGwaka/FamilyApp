@@ -1,3 +1,4 @@
+import 'package:familyapp/core/api/services/data_service.dart';
 import 'package:familyapp/screens/account/widget/app_info.dart';
 import 'package:familyapp/screens/family/widget/familiy_desc.dart';
 import 'package:familyapp/screens/family/widget/family_setting.dart';
@@ -66,7 +67,7 @@ class _MyFamiliyState extends State<MyFamiliy> {
               centerTitle: true,
               collapseMode: CollapseMode.parallax,
               title: Text(
-                "Rumishaeli Msinga Moshi's",
+                DataService.userData['fullname'] + "'s",
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontWeight: FontWeight.w500,
@@ -137,7 +138,7 @@ class _MyFamiliyState extends State<MyFamiliy> {
                                                 backgroundImage: AssetImage('images/user.png'),
                                               ),
                                               manualStepper(),
-                                              Text('Father (Alive)')
+                                              Text('Father')
                                             ],
                                           ),
                                         ),
@@ -160,7 +161,7 @@ class _MyFamiliyState extends State<MyFamiliy> {
                                                 backgroundImage: AssetImage('images/user.png'),
                                               ),
                                               manualStepper(),
-                                              Text('Mother' + "(Desease)")
+                                              Text('Mother')
                                             ],
                                           ),
                                         ),
@@ -380,7 +381,7 @@ class _MyFamiliyState extends State<MyFamiliy> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: Column(children: [
                                       ListTile(
-                                        leading: "Ke" == 'Ke' ? Icon(Icons.female) : Icon(Icons.male),
+                                        leading: "Male" == DataService.userData['gender'] ? Icon(Icons.female) : Icon(Icons.male),
                                         title: Text("ke"),
                                       ),
                                       ListTile(
@@ -452,24 +453,24 @@ class _MyFamiliyState extends State<MyFamiliy> {
                                     title: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        Text('0712826083'),
-                                        manualSpacer(),
-                                        Container(
-                                          height: 10,
-                                          width: 2,
-                                          decoration: BoxDecoration(
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                        manualSpacer(),
-                                        Text('0712826083'),
+                                        Text(DataService.userData['phone']),
+                                        // manualSpacer(),
+                                        // Container(
+                                        //   height: 10,
+                                        //   width: 2,
+                                        //   decoration: BoxDecoration(
+                                        //     color: Colors.black,
+                                        //   ),
+                                        // ),
+                                        // manualSpacer(),
+                                        // Text('0712826083'),
                                       ],
                                     ),
                                   ),
                                   ListTile(
                                     leading: Icon(Icons.location_on),
                                     title: Text('Dar Es Salaam'),
-                                    subtitle: Text('Bonyokwa - 119'),
+                                    subtitle: Text(DataService.userData['location']),
                                   ),
                                 ],
                               ))

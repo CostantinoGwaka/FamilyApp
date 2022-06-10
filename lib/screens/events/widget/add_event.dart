@@ -1,4 +1,7 @@
+import 'package:familyapp/core/api/index.dart';
+import 'package:familyapp/core/api/services/data_service.dart';
 import 'package:familyapp/screens/widget/buttons.dart';
+import 'package:familyapp/screens/widget/global_widget.dart';
 import 'package:familyapp/screens/widget/input.dart';
 import 'package:familyapp/utilities/constant.dart';
 import 'package:flutter/material.dart';
@@ -230,7 +233,44 @@ class _AddEventState extends State<AddEvent> {
                 UniversalButton(
                   buttonHeight: 53,
                   radius: 20,
-                  action: () {},
+                  action: () {
+                    if (_formKey.currentState.validate()) {
+                      var _data = {
+                        'title': title.text,
+                        'descp': description.text,
+                        'date': selectedDate.toString(),
+                        'time': initialTime.toString(),
+                        'status': _isChecked.toString(),
+                        'location': location.text,
+                        'family_id': DataService.userData['id']
+                      };
+
+                      universalLoading(context, content: "Please wait..");
+                      postMethod(bodyData: _data, endpoint: 'create_event.php').then((value) {
+                        if (value['code'] == 200) {
+                          print("here my result $value");
+                          Navigator.pop(context);
+                          respondMessage(
+                            context,
+                            isSuccess: true,
+                            title: "Successfully",
+                            subTitle: value['body']['message'],
+                          );
+                          title.clear();
+                          description.clear();
+                          location.clear();
+                        } else {
+                          Navigator.pop(context);
+                          respondMessage(
+                            context,
+                            isSuccess: false,
+                            title: "Unsuccessfully",
+                            subTitle: value['body']['message'],
+                          );
+                        }
+                      });
+                    }
+                  },
                   buttonColor: Theme.of(context).primaryColor,
                   child: Text("Add member"),
                   buttonWidth: deviceWidth(context) / 1.1,
