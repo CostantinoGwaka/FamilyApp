@@ -295,7 +295,7 @@ class _LoginState extends State<Login> {
                 subTitle: "please try angain to login",
               );
             } else {
-              if (value['code'] == "200") {
+              if (value['body']['status'] == "200") {
                 var user = value['body']['data'][0];
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 Map<String, dynamic> userdata = {
@@ -335,6 +335,17 @@ class _LoginState extends State<Login> {
                   MaterialPageRoute(
                     builder: (context) => BottomNavigation(),
                   ),
+                );
+              } else {
+                passController.clear();
+                emailController.clear();
+                Navigator.pop(context);
+                respondMessage(
+                  context,
+                  isSuccess: false,
+                  color: Theme.of(context).primaryColor,
+                  title: "Unsuccessully",
+                  subTitle: "Phone number or password is invalid",
                 );
               }
             }

@@ -2,7 +2,6 @@ import 'package:familyapp/core/api/services/data_service.dart';
 import 'package:familyapp/screens/account/widget/app_info.dart';
 import 'package:familyapp/screens/family/widget/familiy_desc.dart';
 import 'package:familyapp/screens/family/widget/family_setting.dart';
-import 'package:familyapp/screens/location_slider.dart';
 import 'package:familyapp/screens/widget/bottom_sheet.dart';
 import 'package:familyapp/utilities/constant.dart';
 import 'package:flutter/material.dart';

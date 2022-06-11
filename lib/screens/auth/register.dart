@@ -223,7 +223,7 @@ class _RegistrationState extends State<Registration> {
                                                   itemCount: userLists.length,
                                                   itemBuilder: (BuildContext context, int index) {
                                                     return StatefulBuilder(
-                                                      builder: (BuildContext context, setState /*You can rename this!*/) {
+                                                      builder: (BuildContext context, setState) {
                                                         return GestureDetector(
                                                           onTap: () {
                                                             setState(() {
@@ -298,6 +298,12 @@ class _RegistrationState extends State<Registration> {
                               ),
                             ),
                             label: "Full name",
+                            validator: (String value) {
+                              if (value.isEmpty) {
+                                return 'Please enter full name';
+                              }
+                              return null;
+                            },
                           ),
                           manualStepper(step: 10),
                           Padding(
@@ -411,6 +417,12 @@ class _RegistrationState extends State<Registration> {
                               ),
                             ),
                             label: "Phone number",
+                            validator: (String value) {
+                              if (value.isEmpty) {
+                                return 'Please phone number';
+                              }
+                              return null;
+                            },
                           ),
                           manualStepper(step: 10),
                           UniversalInput(
@@ -426,6 +438,12 @@ class _RegistrationState extends State<Registration> {
                               ),
                             ),
                             label: "Location",
+                            validator: (String value) {
+                              if (value.isEmpty) {
+                                return 'Please enter location';
+                              }
+                              return null;
+                            },
                           ),
                           manualStepper(step: 10),
                           UniversalInput(
@@ -503,7 +521,7 @@ class _RegistrationState extends State<Registration> {
                             bodyData: _data,
                           ).then((value) {
                             print('jfjfjjfjf $value');
-                            if (value['code'] == 200) {
+                            if (value['body']['status'] == "200") {
                               Navigator.pop(context);
                               respondMessage(
                                 context,
@@ -518,22 +536,24 @@ class _RegistrationState extends State<Registration> {
                                   builder: (context) => Login(),
                                 ),
                               );
-                            } else if (value['code'] == 302) {
+                            } else if (value['body']['status'] == "302") {
                               Navigator.pop(context);
                               respondMessage(
                                 context,
                                 isSuccess: false,
                                 color: Theme.of(context).primaryColor,
-                                title: value['msg'],
-                                subTitle: "You entered incorrect join code!",
+                                title: "Unsuccessfull",
+                                subTitle: value['body']['message'],
                               );
-                            } else {
+                            } else if (value['body']['status'] == "300") {
+                              Navigator.pop(context);
+
                               respondMessage(
                                 context,
                                 isSuccess: false,
                                 color: Theme.of(context).primaryColor,
                                 title: "Unsuccesfully",
-                                subTitle: "Try another ... ",
+                                subTitle: value['body']['message'],
                               );
                             }
                           });

@@ -274,7 +274,7 @@ class _AddEventState extends State<AddEvent> {
                     }
                   },
                   buttonColor: Theme.of(context).primaryColor,
-                  child: Text("Add member"),
+                  child: Text("Add Event"),
                   buttonWidth: deviceWidth(context) / 1.1,
                 )
               ],
