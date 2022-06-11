@@ -127,12 +127,12 @@ class _MyFamiliyState extends State<MyFamiliy> {
                                           onTap: () {
                                             info(
                                               context,
-                                              name: 'Constantino Gwaka',
+                                              name: DataService.userData['fullname'],
                                               age: '1995-12-21',
                                               title: 'Father',
-                                              gender: 'Me',
+                                              gender: DataService.userData['gender'],
                                               job: 'IT',
-                                              phone: '0712826083',
+                                              phone: DataService.userData['phone'],
                                             );
                                           },
                                           child: Column(
@@ -142,7 +142,7 @@ class _MyFamiliyState extends State<MyFamiliy> {
                                                 backgroundImage: AssetImage('images/user.png'),
                                               ),
                                               manualStepper(),
-                                              Text('Father')
+                                              DataService.userData['gender'] == "Male" ? Text('Father') : Text('Father')
                                             ],
                                           ),
                                         ),
@@ -453,7 +453,6 @@ class _MyFamiliyState extends State<MyFamiliy> {
                                   ListTile(
                                     leading: Icon(Icons.phone),
                                     title: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Text(DataService.userData['phone']),
                                         // manualSpacer(),
@@ -471,8 +470,8 @@ class _MyFamiliyState extends State<MyFamiliy> {
                                   ),
                                   ListTile(
                                     leading: Icon(Icons.location_on),
-                                    title: Text('Dar Es Salaam'),
-                                    subtitle: Text(DataService.userData['location']),
+                                    // title: Text('Dar Es Salaam'),
+                                    title: Text(DataService.userData['location']),
                                   ),
                                   manualStepper(step: 70)
                                 ],
@@ -528,11 +527,11 @@ class _MyFamiliyState extends State<MyFamiliy> {
                   ),
                   ListTile(
                     leading: Icon(Icons.phone),
-                    title: Text('255712826083'),
+                    title: Text(phone),
                     // subtitle: Text(phone),
                   ),
                   ListTile(
-                    leading: gender == 'Ke' ? Icon(Icons.female) : Icon(Icons.male),
+                    leading: gender == 'Female' ? Icon(Icons.female) : Icon(Icons.male),
                     title: Text(gender),
                   ),
                   ListTile(

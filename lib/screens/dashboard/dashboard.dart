@@ -55,7 +55,7 @@ class DashboardScreen extends State<DashBoard> {
     });
     getEventList().then((value) {
       print(" vlaueeeee $value");
-      if (value['body']['status'] == "300") {
+      if (value['body']['status'] == "200") {
         setState(() {
           DataService.eventsList = value['body']['data'];
         });
@@ -142,8 +142,7 @@ class DashboardScreen extends State<DashBoard> {
                                 children: [
                                   RichText(
                                     text: TextSpan(
-                                      text: "Hi, " +
-                                          DataService.userData['fullname'],
+                                      text: "Hi, " + DataService.userData['fullname'],
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 16,
@@ -228,8 +227,7 @@ class DashboardScreen extends State<DashBoard> {
                         );
                       },
                       child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5)),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                         child: Padding(
                           padding: const EdgeInsets.all(
                             8.0,
@@ -242,25 +240,18 @@ class DashboardScreen extends State<DashBoard> {
                               children: [
                                 Align(
                                   alignment: Alignment.topLeft,
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "My Family",
-                                        ),
-                                        manualSpacer(),
-                                        Text(
-                                          DataService.myFamilyList == null
-                                              ? "0"
-                                              : DataService.myFamilyList.length
-                                                      .toString() +
-                                                  " Member",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                      ]),
+                                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                                    Text(
+                                      "My Family",
+                                    ),
+                                    manualSpacer(),
+                                    Text(
+                                      DataService.myFamilyList == null ? "0" : DataService.myFamilyList.length.toString() + " Member",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ]),
                                 ),
                                 Align(
                                   alignment: Alignment.bottomRight,
@@ -286,8 +277,7 @@ class DashboardScreen extends State<DashBoard> {
                         );
                       },
                       child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5)),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                         child: Padding(
                           padding: const EdgeInsets.all(
                             8.0,
@@ -300,25 +290,18 @@ class DashboardScreen extends State<DashBoard> {
                               children: [
                                 Align(
                                   alignment: Alignment.topLeft,
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Events",
-                                        ),
-                                        manualSpacer(),
-                                        Text(
-                                          DataService.eventsList == null
-                                              ? "0" + " Event(s)"
-                                              : DataService.eventsList.length
-                                                      .toString() +
-                                                  " Event(s)",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                      ]),
+                                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                                    Text(
+                                      "Events",
+                                    ),
+                                    manualSpacer(),
+                                    Text(
+                                      DataService.eventsList == null ? "0" + " Event(s)" : DataService.eventsList.length.toString() + " Event(s)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ]),
                                 ),
                                 Align(
                                   alignment: Alignment.bottomRight,
