@@ -513,6 +513,7 @@ class _RegistrationState extends State<Registration> {
                             "code": _codeController.text,
                             "password": _passController.text,
                             "mahusiano": '',
+                            "action": 'reg',
                             'dob': selectedDate.toString()
                           };
 

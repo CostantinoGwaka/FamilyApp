@@ -5,6 +5,7 @@ import 'package:familyapp/core/api/services/data_service.dart';
 import 'package:familyapp/screens/auth/pre_auth.dart';
 import 'package:familyapp/screens/bottom_nav/bottom_nav.dart';
 import 'package:familyapp/screens/widget/ui_helpers.dart';
+import 'package:familyapp/utilities/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -32,6 +33,7 @@ class _MyAppState extends State<MyApp> {
         Map<String, dynamic> decodedMap = json.decode(value);
         setState(() {
           DataService.userData = decodedMap;
+          userKey = DataService.userData['password'];
         });
       }
     });
@@ -57,8 +59,8 @@ class _MyAppState extends State<MyApp> {
                 visualDensity: VisualDensity.adaptivePlatformDensity,
                 // textTheme: GoogleFonts.poppinsTextTheme(),
               ),
-              // home: DataService.userData.isEmpty ? PreAuth() : BottomNavigation(),
-              home: PreAuth(),
+              home: userKey == null ? PreAuth() : BottomNavigation(),
+              // home: PreAuth(),
             );
           }
         });

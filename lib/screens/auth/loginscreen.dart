@@ -152,12 +152,12 @@ class _LoginState extends State<Login> {
                                   // },
                                   validator: (String value) {
                                     if (value.isEmpty) {
-                                      return 'Please enter your username';
+                                      return 'Please enter your phone number';
                                     }
                                     return null;
                                   },
-                                  keyboardType: TextInputType.emailAddress,
-                                  prefixIcon: Icons.email,
+                                  keyboardType: TextInputType.phone,
+                                  prefixIcon: Icons.phone,
                                   // sufixIcon: validateEmail(username)
                                   //     ? const Icon(
                                   //         Icons.check_circle,
@@ -174,8 +174,8 @@ class _LoginState extends State<Login> {
                                       width: 1.0,
                                     ),
                                   ),
-                                  hint: 'Enter your username',
-                                  label: 'Email',
+                                  hint: 'Enter your phone number',
+                                  label: 'Phone Number',
                                 ),
                                 const SizedBox(
                                   height: 15,
@@ -313,6 +313,7 @@ class _LoginState extends State<Login> {
                   'mahusiano': user['mahusiano'],
                   'dob': user['dob'],
                   'id': user['id'],
+                  'password': user['password'],
                 };
                 String encodedMap = json.encode(userdata);
                 prefs.setString('userdata', encodedMap);

@@ -310,6 +310,7 @@ class _FamiliySettingsState extends State<FamiliySettings> {
                         "parent_id": relation == "Husband/Wife" ? '' : DataService.userData['id'],
                         "code": _codeController.text,
                         "password": '12345678',
+                        "action": 'add',
                         "mahusiano": relation == "Husband/Wife" ? DataService.userData['id'] : '',
                         'dob': selectedDate.toString()
                       };
