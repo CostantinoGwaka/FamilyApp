@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:familyapp/screens/family/widget/each_family.dart';
 import 'package:familyapp/screens/widget/global_widget.dart';
+import 'package:familyapp/screens/widget/ui_helpers.dart';
 import 'package:familyapp/utilities/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -188,7 +189,18 @@ class _AllMemberState extends State<AllMember> {
               ),
             ),
             Expanded(
-              child:  ListView.builder(
+              child: userLists.isEmpty
+                  ? Center(
+                      child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        CircularProgressIndicator(),
+                        UIHelper.verticalSpace(height: 10),
+                        Text('Please wait'),
+                      ],
+                    ),)
+                  : ListView.builder(
                       physics: ClampingScrollPhysics(),
                       itemCount: userLists.length,
                       itemBuilder: (context, index) {

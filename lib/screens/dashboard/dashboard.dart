@@ -8,6 +8,7 @@ import 'package:familyapp/screens/family/my_family.dart';
 import 'package:familyapp/utilities/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class DashBoard extends StatefulWidget {
   @override
@@ -48,19 +49,33 @@ class DashboardScreen extends State<DashBoard> {
 
   @override
   void initState() {
-    getFamilyList().then((value) {
-      setState(() {
-        DataService.myFamilyList = value['body']['data'];
-      });
-    });
-    getEventList().then((value) {
-      print(" vlaueeeee $value");
-      if (value['body']['status'] == "200") {
+    getFamilyList().then((value) async {
+      if (await InternetConnectionChecker().hasConnection) {
         setState(() {
-          DataService.eventsList = value['body']['data'];
+          DataService.myFamilyList = value['body']['data'];
         });
       } else {
-        DataService.eventsList = [];
+        return {
+          "msg": "Mtandao Haupo",
+          "body": "Hakuna_mtandao",
+        };
+      }
+    });
+    getEventList().then((value) async {
+      if (await InternetConnectionChecker().hasConnection) {
+        print(" vlaueeeee $value");
+        if (value['body']['status'] == "200") {
+          setState(() {
+            DataService.eventsList = value['body']['data'];
+          });
+        } else {
+          DataService.eventsList = [];
+        }
+      } else {
+        return {
+          "msg": "Mtandao Haupo",
+          "body": "Hakuna_mtandao",
+        };
       }
     });
     super.initState();

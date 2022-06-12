@@ -51,6 +51,8 @@ dependencies:
   cached_network_image:
   js: ^0.6.3
   achievement_view:
+  internet_connection_checker:
+
 
 
 dev_dependencies:

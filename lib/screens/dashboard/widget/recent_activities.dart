@@ -3,6 +3,7 @@ import 'package:familyapp/screens/widget/global_widget.dart';
 import 'package:familyapp/screens/widget/ui_helpers.dart';
 import 'package:familyapp/utilities/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl/intl.dart';
 
 class RecentEvents extends StatefulWidget {
@@ -16,16 +17,19 @@ Future recent;
 
 class _RecentEventsState extends State<RecentEvents> {
   Future<dynamic> getEventList() async {
-    if (recent == null) {
+    if (await InternetConnectionChecker().hasConnection) {
       return postMethod(endpoint: "get_all_events.php");
     } else {
-      return recent;
+      return {
+        "msg": "Mtandao Haupo",
+        "body": "Hakuna_mtandao",
+      };
     }
   }
 
   @override
   void initState() {
-    recent = getEventList();
+    getEventList();
     super.initState();
   }
 
@@ -33,11 +37,12 @@ class _RecentEventsState extends State<RecentEvents> {
   Widget build(BuildContext context) {
     // print('fjjfjfj ${recent == null}');
     return FutureBuilder(
-        future: recent,
+        future: getEventList(),
         builder: (context, AsyncSnapshot snapshot) {
+          print('dofffff ${snapshot.data['body']}');
           switch (snapshot.connectionState) {
             case ConnectionState.done:
-              if (snapshot.data != "Hakuna_mtandao") {
+              if (snapshot.data['body'] != "Hakuna_mtandao") {
                 if (!snapshot.hasData) {
                   return Center(
                       child: Column(
@@ -46,7 +51,7 @@ class _RecentEventsState extends State<RecentEvents> {
                     children: [
                       CircularProgressIndicator(),
                       UIHelper.verticalSpace(height: 10),
-                      Text('Inapakua Tafadhari subiri'),
+                      Text('Please wait...'),
                     ],
                   ));
                 }
@@ -184,9 +189,10 @@ class _RecentEventsState extends State<RecentEvents> {
                 );
               } else {
                 return NoData(
-                  title: "Hakuna Mtandao",
-                  imagepath: 'assets/images/no_signal.png',
-                  description: 'Tafadhari hakikisha una mtandao .',
+                
+                  title: "No Network",
+                  imagepath: 'images/no_signal.png',
+                  description: 'Check your network setting .',
                 );
               }
 
