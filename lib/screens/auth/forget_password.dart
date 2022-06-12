@@ -161,44 +161,18 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                 isSuccess: false,
                 color: Theme.of(context).primaryColor,
                 title: "Something wrong",
-                subTitle: "please try angain to login",
+                subTitle: "please try angain",
               );
             } else {
               if (value['body']['status'] == "200") {
-                // var user = value['body']['data'][0];
-                // SharedPreferences prefs = await SharedPreferences.getInstance();
-                // Map<String, dynamic> userdata = {
-                //   // 'fullname': "Cosmas Paulo",
-                //   // 'phonenumber': "0712826083",
-                //   // 'email': 'cosmasp59@gmail.com',
-                //   // 'level': "1",
-                //   // 'status': "active",
-                //   'fullname': user['fname'],
-                //   'gender': user['gender'],
-                //   'phone': user['phone'],
-                //   'location': user['location'],
-                //   'parent_id': user['parent_id'],
-                //   'status': user['status'],
-                //   'mahusiano': user['mahusiano'],
-                //   'dob': user['dob'],
-                //   'id': user['id'],
-                //   'password': user['password'],
-                // };
-                // String encodedMap = json.encode(userdata);
-                // prefs.setString('userdata', encodedMap);
-                // String datas = prefs.getString('userdata');
-                // Map<String, dynamic> decodedMap = json.decode(datas);
-                // setState(() {
-                //   DataService.userData = decodedMap;
-                //   userKey = user['password'];
-                // });
+         
                 Navigator.pop(context);
                 respondMessage(
                   context,
                   isSuccess: true,
                   color: Theme.of(context).primaryColor,
-                  title: "Msingaki's Generation",
-                  subTitle: "Welcome back, and enjoy it... ",
+                  title: "Successfull",
+                  subTitle: "Password change successfull",
                 );
                 Navigator.pop(
                   context,
@@ -212,7 +186,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   isSuccess: false,
                   color: Theme.of(context).primaryColor,
                   title: "Unsuccessully",
-                  subTitle: "Phone number or password is invalid",
+                  subTitle: "Please try again",
                 );
               }
             }

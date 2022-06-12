@@ -1,9 +1,12 @@
 import 'package:familyapp/core/api/services/data_service.dart';
 import 'package:familyapp/screens/account/widget/app_info.dart';
+import 'package:familyapp/screens/account/widget/user_info.dart';
 import 'package:familyapp/screens/auth/forget_password.dart';
 import 'package:familyapp/screens/auth/loginscreen.dart';
+import 'package:familyapp/screens/widget/buttons.dart';
 import 'package:familyapp/utilities/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Account extends StatefulWidget {
   const Account({Key key}) : super(key: key);
@@ -96,7 +99,14 @@ class _AccountState extends State<Account> {
                     ),
                     title: Text('My Account'),
                     trailing: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => UserInfo(),
+                          ),
+                        );
+                      },
                       icon: Icon(
                         Icons.arrow_forward_ios,
                         size: 20,
@@ -174,6 +184,8 @@ class _AccountState extends State<Account> {
                   ),
                 ),
                 Card(
+                  shape: shape,
+                  elevation: 0,
                   child: ListTile(
                     leading: Container(
                       height: 30,
@@ -197,12 +209,36 @@ class _AccountState extends State<Account> {
                       ),
                     ),
                     onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Login(),
-                        ),
-                      );
+                      showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('Logout'),
+                              content: Text('Are ypu sure you want to log out?'),
+                              actions: [
+                                UniversalButton(
+                                  buttonWidth: 120,
+                                  buttonHeight: 38,
+                                  buttonColor: Colors.grey,
+                                  color: Colors.grey,
+                                  child: Text('No'),
+                                  action: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                                UniversalButton(
+                                  buttonWidth: 120,
+                                  buttonColor: Theme.of(context).primaryColor,
+                                  buttonHeight: 38,
+                                  child: Text('Yes'),
+                                  action: () {
+                                    logout();
+                                  },
+                                )
+                              ],
+                            );
+                          });
                     },
                   ),
                 ),
@@ -275,6 +311,18 @@ class _AccountState extends State<Account> {
       //     ),
       //   ),
       // ),
+    );
+  }
+
+  void logout() async {
+    SharedPreferences shared = await SharedPreferences.getInstance();
+    await shared.remove('userdata');
+    DataService.userData.clear();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Login(),
+      ),
     );
   }
 }
