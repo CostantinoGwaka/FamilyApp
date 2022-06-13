@@ -32,7 +32,6 @@ class _FamilyDescriptionState extends State<FamilyDescription> {
         itemCount: DataService.myFamilyList.length,
         itemBuilder: (context, index) {
           var data = DataService.myFamilyList[index];
-          print("hfhfhfhfh $data");
           return Card(
             child: Column(children: [
               manualStepper(),
@@ -60,20 +59,21 @@ class _FamilyDescriptionState extends State<FamilyDescription> {
                 trailing: GestureDetector(
                   child: Text('View more'),
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => EachFamiy(
-                    //       isSingle: 'true',
-                    //       name: data['fname'],
-                    //       location: data['location'],
-                    //       gender: data['gender'],
-                    //       age: '1990-07-19',
-                    //       phone: data['phone'],
-                    //       parentId: data['parent_id'],
-                    //     ),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EachFamiy(
+                          id: data['id'],
+                          isSingle: 'true',
+                          name: data['fname'],
+                          location: data['location'],
+                          gender: data['gender'],
+                          age: '1990-07-19',
+                          phone: data['phone'],
+                          parentId: data['parent_id'],
+                        ),
+                      ),
+                    );
                   },
                 ),
               ),

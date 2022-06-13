@@ -261,12 +261,14 @@ class _AllMemberState extends State<AllMember> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => EachFamiy(
+                                            id: userLists[index].id,
                                             isSingle: 'true',
-                                            name: 'John Constantino',
-                                            location: 'Mbezi Beach - 1298',
-                                            gender: 'Me',
+                                            name: userLists[index].name,
+                                            location: userLists[index].location,
+                                            gender: userLists[index].gender,
                                             age: '1990-07-19',
-                                            job: 'Accountant',
+                                            phone: userLists[index].phone,
+                                            parentId: userLists[index].parentId,
                                           ),
                                         ),
                                       );
