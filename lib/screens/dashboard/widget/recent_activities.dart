@@ -39,8 +39,22 @@ class _RecentEventsState extends State<RecentEvents> {
     return FutureBuilder(
         future: getEventList(),
         builder: (context, AsyncSnapshot snapshot) {
-          print('dofffff ${snapshot.data['body']}');
           switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+              return Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(),
+                    UIHelper.verticalSpace(
+                      height: 5,
+                    ),
+                    Text('Please wait...'),
+                  ],
+                ),
+              );
+              break;
             case ConnectionState.done:
               if (snapshot.data['body'] != "Hakuna_mtandao") {
                 if (!snapshot.hasData) {
@@ -189,7 +203,6 @@ class _RecentEventsState extends State<RecentEvents> {
                 );
               } else {
                 return NoData(
-                
                   title: "No Network",
                   imagepath: 'images/no_signal.png',
                   description: 'Check your network setting .',

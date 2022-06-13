@@ -317,7 +317,10 @@ class _AccountState extends State<Account> {
   void logout() async {
     SharedPreferences shared = await SharedPreferences.getInstance();
     await shared.remove('userdata');
-    DataService.userData.clear();
+     DataService.userData.clear();
+    setState(() {
+      userKey = '';
+    });
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(

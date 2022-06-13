@@ -33,7 +33,11 @@ class _MyAppState extends State<MyApp> {
         Map<String, dynamic> decodedMap = json.decode(value);
         setState(() {
           DataService.userData = decodedMap;
-          userKey = DataService.userData['password'];
+          userKey = DataService.userData['password'] ?? '';
+        });
+      } else {
+        setState(() {
+          userKey = null;
         });
       }
     });
@@ -131,6 +135,6 @@ class Init {
     // This is where you can initialize the resources needed by your app while
     // the splash screen is displayed.  Remove the following example because
     // delaying the user experience is a bad design practice!
-    await Future.delayed(const Duration(seconds: 4));
+    await Future.delayed(const Duration(seconds: 3));
   }
 }

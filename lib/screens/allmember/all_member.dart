@@ -8,6 +8,7 @@ import 'package:familyapp/utilities/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:http/http.dart' as http;
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class AllMember extends StatefulWidget {
@@ -93,6 +94,15 @@ class _AllMemberState extends State<AllMember> {
     }
   }
 
+  Future checkInternet() async {
+    if (await InternetConnectionChecker().hasConnection) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool internet = true;
   static List<User> parseAgents(String responseBody) {
     print("here is response $responseBody");
     final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
@@ -102,6 +112,13 @@ class _AllMemberState extends State<AllMember> {
   @override
   void initState() {
     super.initState();
+
+    checkInternet().then((value) {
+      setState(() {
+        internet = value;
+      });
+      print("here is response $value");
+    });
     getAllulistList().then((userslist) {
       setState(() {
         ulist = userslist;
@@ -189,71 +206,78 @@ class _AllMemberState extends State<AllMember> {
               ),
             ),
             Expanded(
-              child: userLists.isEmpty
-                  ? Center(
-                      child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        CircularProgressIndicator(),
-                        UIHelper.verticalSpace(height: 10),
-                        Text('Please wait'),
-                      ],
-                    ),)
-                  : ListView.builder(
-                      physics: ClampingScrollPhysics(),
-                      itemCount: userLists.length,
-                      itemBuilder: (context, index) {
-                        return Card(
-                          child: Column(children: [
-                            manualStepper(),
-                            ListTile(
-                              leading: CircleAvatar(
-                                maxRadius: 35,
-                                backgroundImage: AssetImage('images/user.png'),
-                              ),
-                              title: Text(
-                                userLists[index].name,
-                              ),
-                              subtitle: Row(
-                                children: [
-                                  Text('Male'),
-                                  manualSpacer(),
-                                  Container(
-                                    height: 10,
-                                    width: 2,
-                                    decoration: BoxDecoration(
-                                      color: Colors.black,
-                                    ),
+              child: !internet
+                  ? NoData(
+                      title: "No Network",
+                      imagepath: 'images/no_signal.png',
+                      description: 'Check your network setting .',
+                    )
+                  : userLists.isEmpty
+                      ? Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              CircularProgressIndicator(),
+                              UIHelper.verticalSpace(height: 10),
+                              Text('Please wait'),
+                            ],
+                          ),
+                        )
+                      : ListView.builder(
+                          physics: ClampingScrollPhysics(),
+                          itemCount: userLists.length,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              child: Column(children: [
+                                manualStepper(),
+                                ListTile(
+                                  leading: CircleAvatar(
+                                    maxRadius: 35,
+                                    backgroundImage: AssetImage('images/user.png'),
                                   ),
-                                  manualSpacer(),
-                                  Text("17 year(s)"),
-                                ],
-                              ),
-                              trailing: GestureDetector(
-                                child: Text('View more'),
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => EachFamiy(
-                                        isSingle: 'true',
-                                        name: 'John Constantino',
-                                        location: 'Mbezi Beach - 1298',
-                                        gender: 'Me',
-                                        age: '1990-07-19',
-                                        job: 'Accountant',
+                                  title: Text(
+                                    userLists[index].name,
+                                  ),
+                                  subtitle: Row(
+                                    children: [
+                                      Text('Male'),
+                                      manualSpacer(),
+                                      Container(
+                                        height: 10,
+                                        width: 2,
+                                        decoration: BoxDecoration(
+                                          color: Colors.black,
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                            manualStepper()
-                          ]),
-                        );
-                      },
-                    ),
+                                      manualSpacer(),
+                                      Text("17 year(s)"),
+                                    ],
+                                  ),
+                                  trailing: GestureDetector(
+                                    child: Text('View more'),
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => EachFamiy(
+                                            isSingle: 'true',
+                                            name: 'John Constantino',
+                                            location: 'Mbezi Beach - 1298',
+                                            gender: 'Me',
+                                            age: '1990-07-19',
+                                            job: 'Accountant',
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                                manualStepper()
+                              ]),
+                            );
+                          },
+                        ),
             )
           ],
         ));

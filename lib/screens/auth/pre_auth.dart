@@ -30,7 +30,7 @@ class _PreAuthState extends State<PreAuth> {
                 ),
                 manualStepper(step: 20),
                 const Text(
-                  'Join Msingati generation Family ',
+                  'Join Msingaki generation Family ',
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.white,
