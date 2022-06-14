@@ -35,10 +35,11 @@ class _RecentEventsState extends State<RecentEvents> {
 
   @override
   Widget build(BuildContext context) {
-    // print('fjjfjfj ${recent == null}');
     return FutureBuilder(
         future: getEventList(),
         builder: (context, AsyncSnapshot snapshot) {
+          print('fjjfjfj ${snapshot}');
+
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
               return Center(
@@ -56,6 +57,13 @@ class _RecentEventsState extends State<RecentEvents> {
               );
               break;
             case ConnectionState.done:
+              if (snapshot.data['body']['status'] == "300") {
+                return NoData(
+                  title: "No Event ",
+                  imagepath: 'images/no_data.png',
+                  description: 'There is no event right now',
+                );
+              }
               if (snapshot.data['body'] != "Hakuna_mtandao") {
                 if (!snapshot.hasData) {
                   return Center(

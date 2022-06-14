@@ -10,6 +10,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 class EachFamiy extends StatefulWidget {
   final String isSingle;
   final String name;
+  final dynamic mahusiano;
   final String id;
   final String phone;
   final String parentId;
@@ -17,7 +18,7 @@ class EachFamiy extends StatefulWidget {
   final String gender;
   final String age;
   final String job;
-  EachFamiy({Key key, this.id, this.parentId, this.phone, this.gender, this.location, this.age, this.job, this.isSingle, this.name}) : super(key: key);
+  EachFamiy({Key key, this.mahusiano, this.id, this.parentId, this.phone, this.gender, this.location, this.age, this.job, this.isSingle, this.name}) : super(key: key);
 
   @override
   State<EachFamiy> createState() => _EachFamiyState();

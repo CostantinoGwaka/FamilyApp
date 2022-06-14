@@ -50,10 +50,17 @@ class DashboardScreen extends State<DashBoard> {
   @override
   void initState() {
     getFamilyList().then((value) async {
+      print("vlaueeeee ya familiy ${value}");
       if (await InternetConnectionChecker().hasConnection) {
-        setState(() {
-          DataService.myFamilyList = value['body']['data'];
-        });
+        if (value['body']['status'] == "200") {
+          setState(() {
+            DataService.myFamilyList = value['body']['data'];
+          });
+        } else {
+          setState(() {
+            DataService.myFamilyList = null;
+          });
+        }
       } else {
         return {
           "msg": "Mtandao Haupo",
@@ -63,7 +70,6 @@ class DashboardScreen extends State<DashBoard> {
     });
     getEventList().then((value) async {
       if (await InternetConnectionChecker().hasConnection) {
-        print(" vlaueeeee $value");
         if (value['body']['status'] == "200") {
           setState(() {
             DataService.eventsList = value['body']['data'];
@@ -83,7 +89,7 @@ class DashboardScreen extends State<DashBoard> {
 
   @override
   Widget build(BuildContext context) {
-    print("vlaueeeee ${DataService.eventsList}");
+    print("vlaueeeee ${DataService.myFamilyList}");
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarIconBrightness: Brightness.dark,
     ));
@@ -99,7 +105,7 @@ class DashboardScreen extends State<DashBoard> {
             // color: Colors.black,
           ),
           title: Text(
-            "Misingati\'s Generation",
+            "Msingaki\'s Generation",
             // style: TextStyle(color: Colors.black),
           ),
           actions: [

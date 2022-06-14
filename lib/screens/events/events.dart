@@ -85,7 +85,7 @@ class _EventScreenState extends State<EventScreen> {
                 if (snapshot.data['body']['status'] == "300") {
                   return NoData(
                     title: "EVENT(S)",
-                    imagepath: 'images/nodata.png',
+                    imagepath: 'images/no_data.png',
                     description: 'There is no any events posted by your family, tap Icon bottom right to add',
                   );
                 } else {
@@ -109,7 +109,6 @@ class _EventScreenState extends State<EventScreen> {
                         var data = snapshot.data['body']['data'][index];
                         String time = DateFormat('d, MMM, yyyy').format(DateTime.tryParse(data['date_event']));
 
-                        print('hfhhfhhfhf $data');
                         return Card(
                           elevation: 0,
                           shape: shape,

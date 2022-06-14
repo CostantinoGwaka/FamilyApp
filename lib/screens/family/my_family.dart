@@ -98,7 +98,7 @@ class _MyFamiliyState extends State<MyFamiliy> {
                     SizedBox(
                       height: deviceHeight(context) / 25,
                     ),
-                    DataService.myFamilyList.isNotEmpty
+                    DataService.myFamilyList != null
                         ? Column(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,

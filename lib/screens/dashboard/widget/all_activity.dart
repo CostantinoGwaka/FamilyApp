@@ -17,16 +17,12 @@ Future recent;
 
 class _AllActivitiesState extends State<AllActivities> {
   Future<dynamic> getEventList() async {
-    if (recent == null) {
-      return postMethod(endpoint: "get_all_events.php");
-    } else {
-      return recent;
-    }
+    return postMethod(endpoint: "get_all_events.php");
   }
 
   @override
   void initState() {
-    recent = getEventList();
+    getEventList();
     super.initState();
   }
 
@@ -34,21 +30,23 @@ class _AllActivitiesState extends State<AllActivities> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          // iconTheme: IconTheme.of(context).copyWith(
-          //   color: Colors.black,
-          // ),
           elevation: 0,
-          // backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           title: Text(
             'All Event(s)',
-            // style: Theme.of(context).textTheme.headline6,
           ),
         ),
         body: FutureBuilder(
-            future: recent,
+            future: getEventList(),
             builder: (context, AsyncSnapshot snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.done:
+                  if (snapshot.data['body']['status'] == "300") {
+                    return NoData(
+                      title: "No Event ",
+                      imagepath: 'images/no_data.png',
+                      description: 'There is no event right now',
+                    );
+                  }
                   if (snapshot.data != "Hakuna_mtandao") {
                     if (!snapshot.hasData) {
                       return Center(

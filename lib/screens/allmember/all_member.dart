@@ -80,7 +80,7 @@ class _AllMemberState extends State<AllMember> {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         var responseDecoded = jsonDecode(response.body);
-        // print("=======> ${responseDecoded['data']}");
+        print("=======> ${responseDecoded['data']}");
         print(response.body);
 
         List<User> list = parseAgents(jsonEncode(responseDecoded['data']));
@@ -141,7 +141,6 @@ class _AllMemberState extends State<AllMember> {
           ),
           title: Text(
             "Clan's Member",
-            // style: TextStyle(color: Colors.black),
           ),
           actions: [
             Padding(
