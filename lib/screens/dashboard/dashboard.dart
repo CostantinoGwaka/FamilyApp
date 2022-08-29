@@ -137,7 +137,8 @@ class DashboardScreen extends State<DashBoard> {
             )
           ],
         ),
-        body: SafeArea(
+        body:
+         SafeArea(
           child: Material(
               child: Column(
             children: [

@@ -26,7 +26,8 @@ class _AccountState extends State<Account> {
         // backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
       ),
-      body: Column(
+      body: 
+      Column(
         children: [
           manualStepper(step: 20),
           Center(
